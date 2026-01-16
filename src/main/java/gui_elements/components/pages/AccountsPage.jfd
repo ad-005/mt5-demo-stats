@@ -1,0 +1,21 @@
+JFDML JFormDesigner: "8.3" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) {
+			"columns": 2
+		} ) {
+			name: "this"
+			add( new FormContainer( "gui_elements.tables.AccountsTable", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "accountsTable1"
+			} )
+			add( new FormComponent( "gui_elements.components.LoginPanel" ) {
+				name: "loginPanel1"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 95, 175 )
+			"size": new java.awt.Dimension( 945, 620 )
+		} )
+	}
+}

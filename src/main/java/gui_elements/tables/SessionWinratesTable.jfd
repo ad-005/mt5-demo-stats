@@ -1,0 +1,19 @@
+JFDML JFormDesigner: "8.3" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JTable" ) {
+				name: "sessionWinratesTable"
+				"font": new java.awt.Font( "IBM Plex Mono", 1, 16 )
+				"rowSelectionAllowed": false
+				"rowHeight": 30
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 200, 145 )
+			"size": new java.awt.Dimension( 750, 540 )
+		} )
+	}
+}

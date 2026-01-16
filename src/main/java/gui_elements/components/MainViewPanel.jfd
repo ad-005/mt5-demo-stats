@@ -1,0 +1,40 @@
+JFDML JFormDesigner: "8.3" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) {
+			"vgap": 15
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
+				name: "contentPanel"
+				add( new FormComponent( "gui_elements.components.pages.HomePage" ) {
+					name: "homePage1"
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "HOME"
+				} )
+				add( new FormComponent( "gui_elements.components.pages.SearchPage" ) {
+					name: "searchPage1"
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "SEARCH"
+				} )
+				add( new FormComponent( "gui_elements.components.pages.AccountsPage" ) {
+					name: "accountsPage1"
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "ACCOUNTS"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+			add( new FormComponent( "gui_elements.components.panels.SelectionPanel" ) {
+				name: "selectionPanel1"
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "North"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 105, 140 )
+			"size": new java.awt.Dimension( 780, 480 )
+		} )
+	}
+}

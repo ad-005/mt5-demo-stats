@@ -1,0 +1,32 @@
+JFDML JFormDesigner: "8.3" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+			"$layoutConstraints": "hidemode 3,align center center"
+			"$columnConstraints": "[][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill]"
+			"$rowConstraints": "[][][][]"
+		} ) {
+			name: "this"
+			add( new FormComponent( "gui_elements.components.panels.TradingBiasPanel" ) {
+				name: "tradingBiasPanel1"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 12 0 1 2"
+			} )
+			add( new FormComponent( "gui_elements.components.panels.WinratePanel" ) {
+				name: "winratePanel1"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 12 2"
+			} )
+			add( new FormComponent( "gui_elements.components.panels.SessionWinratesCustomPanel" ) {
+				name: "sessionWinratesCustomPanel1"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 12 3,growx"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 75, 90 )
+			"size": new java.awt.Dimension( 1025, 660 )
+		} )
+	}
+}

@@ -1,0 +1,86 @@
+JFDML JFormDesigner: "8.3" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) {
+			"columns": 1
+			"rows": 8
+			"vgap": 10
+		} ) {
+			name: "this"
+			"border": new javax.swing.border.EmptyBorder( 10, 10, 10, 10 )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "addAccountLabel"
+				"text": "Add Account"
+				"font": new java.awt.Font( "IBM Plex Mono", 1, 24 )
+				"horizontalAlignment": 0
+				"background": new java.awt.Color( 153, 153, 153, 255 )
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+			} )
+			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
+				name: "accountNameField"
+				"horizontalAlignment": 0
+				"text": "Name"
+				"font": &Font0 new java.awt.Font( "IBM Plex Mono", 1, 18 )
+				"preferredSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+			} )
+			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
+				name: "accountTypeField"
+				"horizontalAlignment": 0
+				"text": "Type"
+				"font": #Font0
+				"preferredSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"focusLostBehavior": 3
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+			} )
+			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
+				name: "accountServerField"
+				"horizontalAlignment": 0
+				"text": "Server"
+				"font": #Font0
+				"preferredSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"focusLostBehavior": 3
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+			} )
+			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
+				name: "accountLoginField"
+				"horizontalAlignment": 0
+				"text": "Login"
+				"font": #Font0
+				"preferredSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"focusLostBehavior": 3
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+			} )
+			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
+				name: "accountPasswordField"
+				"horizontalAlignment": 0
+				"text": "Password"
+				"font": #Font0
+				"preferredSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"focusLostBehavior": 3
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+			} )
+			add( new FormComponent( "javax.swing.JFormattedTextField" ) {
+				name: "accountInvestorField"
+				"horizontalAlignment": 0
+				"text": "Investor"
+				"font": #Font0
+				"preferredSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"focusLostBehavior": 3
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "addAccountButton"
+				"text": "Add"
+				"font": new java.awt.Font( "IBM Plex Mono", 1, 24 )
+				"background": new java.awt.Color( 204, 204, 204, 255 )
+				"border": new javax.swing.border.SoftBevelBorder( 1, null, null, null, null )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 110, 85 )
+			"size": new java.awt.Dimension( 920, 660 )
+		} )
+	}
+}

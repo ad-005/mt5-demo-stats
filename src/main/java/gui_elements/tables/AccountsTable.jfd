@@ -1,0 +1,21 @@
+JFDML JFormDesigner: "8.3" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JTable" ) {
+				name: "accountsTable"
+				"font": new java.awt.Font( "IBM Plex Mono", 0, 12 )
+				"showVerticalLines": true
+				"showHorizontalLines": true
+				"cursor": new java.awt.Cursor( 1 )
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 260, 240 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}

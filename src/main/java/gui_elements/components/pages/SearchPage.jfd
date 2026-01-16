@@ -1,0 +1,22 @@
+JFDML JFormDesigner: "8.3" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) {
+			"columns": 2
+			"hgap": 10
+		} ) {
+			name: "this"
+			add( new FormContainer( "gui_elements.tables.TradeTable", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "tradeTable1"
+			} )
+			add( new FormComponent( "gui_elements.components.SearchFieldPanel" ) {
+				name: "searchFieldPanel1"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 150, 130 )
+			"size": new java.awt.Dimension( 825, 505 )
+		} )
+	}
+}

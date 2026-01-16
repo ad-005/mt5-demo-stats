@@ -1,0 +1,19 @@
+JFDML JFormDesigner: "8.3" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			add( new FormContainer( "gui_elements.tables.SessionWinratesTable", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "sessionWinratesTable1"
+				"border": new javax.swing.border.CompoundBorder( new javax.swing.border.LineBorder( sfield java.awt.Color black, 2, true ), new javax.swing.border.EmptyBorder( 10, 10, 10, 10 ) )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 10, 0 )
+			"size": new java.awt.Dimension( 1100, 525 )
+		} )
+	}
+}
