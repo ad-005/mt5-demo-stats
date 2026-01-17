@@ -11,6 +11,7 @@ import data.MockDataFactory;
 import data_structures.Trade;
 import gui_elements.components.panels.SearchFieldPanel;
 import gui_elements.tables.*;
+import models.AccountSelectionModel;
 import models.TradeDataModel;
 import table_controllers.TradeTableController;
 import table_models.TradeTableModel;
@@ -25,6 +26,7 @@ public class SearchPage extends JPanel {
     private TradeDataModel tradeDataModel;
     private TradeTableModel tradeTableModel;
     private TradeTableController tradeTableController;
+    private AccountSelectionModel accountSelectionModel;
 
     private SearchPage() {
 
@@ -56,8 +58,14 @@ public class SearchPage extends JPanel {
     private SearchFieldPanel searchFieldPanel1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 
+    // START GETTERS
+    public SearchFieldPanel getSearchFieldPanel() { return searchFieldPanel1; }
+
+    // END GETTERS
+
     private void initializeModels() {
         tradeTableModel = new TradeTableModel();
+        accountSelectionModel = new AccountSelectionModel();
         tradeTable1.setTableModel(tradeTableModel);
 
         List<Trade> initialTrades = MockDataFactory.generateTrades(200);
@@ -69,7 +77,8 @@ public class SearchPage extends JPanel {
                 tradeTable1.getTable(),
                 tradeTableModel,
                 tradeDataModel,
-                searchFieldPanel1
+                searchFieldPanel1,
+                accountSelectionModel
         );
 
     }

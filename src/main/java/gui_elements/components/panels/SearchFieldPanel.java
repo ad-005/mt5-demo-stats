@@ -31,13 +31,12 @@ public class SearchFieldPanel extends JPanel implements ModelObserver {
 
     public SearchFieldPanel() {
         initComponents();
-//        setAccountComboBoxProperties();
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Educational license - Antonije Dragicevic
-        accountComboBox = new JComboBox();
+        accountSelectionPanel1 = new AccountSelectionPanel();
         label1 = new JLabel();
         searchByDateButton = new JButton();
         startDateTextField = new JTextField();
@@ -61,11 +60,7 @@ public class SearchFieldPanel extends JPanel implements ModelObserver {
             "[]" +
             "[]" +
             "[]"));
-
-        //---- accountComboBox ----
-        accountComboBox.setFont(new Font("IBM Plex Mono", Font.BOLD, 12));
-        accountComboBox.setToolTipText("Pick an account for which to show trades.");
-        add(accountComboBox, "pad 0,cell 0 2,alignx center,growx 0");
+        add(accountSelectionPanel1, "cell 0 2");
 
         //---- label1 ----
         label1.setText("Search by account");
@@ -119,7 +114,7 @@ public class SearchFieldPanel extends JPanel implements ModelObserver {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     // Generated using JFormDesigner Educational license - Antonije Dragicevic
-    private JComboBox accountComboBox;
+    private AccountSelectionPanel accountSelectionPanel1;
     private JLabel label1;
     private JButton searchByDateButton;
     private JTextField startDateTextField;
@@ -150,6 +145,8 @@ public class SearchFieldPanel extends JPanel implements ModelObserver {
     public DefaultComboBoxModel<Account> getAccountComboBoxModel() {
         return accountComboBoxModel;
     }
+
+    public AccountSelectionPanel getAccountSelectionPanel() { return accountSelectionPanel1; }
     // END GETTERS
 
     // START SETTERS
@@ -164,11 +161,6 @@ public class SearchFieldPanel extends JPanel implements ModelObserver {
     public void setTradesShownText(int shown, int total) {
         tradesShownLabel.setText("Showing " + shown + " out of " + total + " trades");
 
-    }
-
-    public void setAccountComboBoxModel(List<Account> accounts) {
-        Account[] accountArray = accounts.toArray(new Account[0]);
-        this.accountComboBoxModel = new DefaultComboBoxModel<>(accountArray);
     }
     // END SETTERS
 

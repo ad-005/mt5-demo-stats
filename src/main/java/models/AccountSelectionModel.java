@@ -6,11 +6,15 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AccountSelectionModel {
-    public final String ACCOUNT_SELECTED_PROPERTY = "accountSelected";
-    private List<Account> accounts;
+    public final Account ALL_ACCOUNTS = null;
+    private List<Account> accounts = new ArrayList<>();
+    private Account selectedAccount = ALL_ACCOUNTS;
+
+    public static final String ACCOUNT_SELECTED_PROPERTY = "accountSelected";
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     // Constructor
@@ -18,10 +22,39 @@ public class AccountSelectionModel {
 
     }
 
+    // START GETTERS
+    public Account getSelectedAccount() {
+        return selectedAccount;
+    }
+
+    public List<Account> getAccounts() {
+        return accounts != null ? List.copyOf(accounts) : List.of();
+    }
+
+    public boolean isAllAccountsSelected() {
+        return selectedAccount == ALL_ACCOUNTS;
+    }
+    // END GETTERS
+
+    // START SETTERS
+    public void setSelectedAccount(Account account) {
+        Account oldValue = this.selectedAccount;
+        this.selectedAccount = account;
+        pcs.firePropertyChange(ACCOUNT_SELECTED_PROPERTY, oldValue, account);
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts.clear();
+        this.accounts.addAll(accounts);
+    }
+    // END SETTERS
+
     // Add property change listener
     public void addPropertyChangeListener(PropertyChangeListener l) { pcs.addPropertyChangeListener(l); }
+    public void addPropertyChangeListener(String property, PropertyChangeListener l) { pcs.addPropertyChangeListener(property, l); }
+
 
     // Remove property change listener
-    public void removePropertyChangeListener(PropertyChangeListener l) { pcs.removePropertyChangeListener(l); }
+    public void removePropertyChangeListener(String property, PropertyChangeListener l) { pcs.removePropertyChangeListener(property, l); }
 
 }

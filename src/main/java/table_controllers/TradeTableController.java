@@ -2,7 +2,7 @@ package table_controllers;
 
 import data_structures.Trade;
 import gui_elements.components.panels.SearchFieldPanel;
-import gui_elements.tables.TradeTable;
+import models.AccountSelectionModel;
 import models.TradeDataModel;
 import table_models.TradeTableModel;
 
@@ -11,7 +11,6 @@ import javax.swing.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 
-import java.time.LocalDateTime;
 import java.time.LocalDate;
 
 import java.time.format.DateTimeFormatter;
@@ -23,6 +22,7 @@ public class TradeTableController implements PropertyChangeListener {
     private final TradeTableModel tableModel;
     private final TradeDataModel tradeDataModel;
     private final SearchFieldPanel filterPanel;
+    private final AccountSelectionModel accountSelectionModel;
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static final String DATE_PLACEHOLDER = "DD-MM-YYYY";
@@ -32,32 +32,44 @@ public class TradeTableController implements PropertyChangeListener {
     private LocalDate currentEndDate = null;
 
     public TradeTableController(JTable tablePanel, TradeTableModel tableModel,
-                                TradeDataModel tradeDataModel, SearchFieldPanel filterPanel) {
+                                TradeDataModel tradeDataModel, SearchFieldPanel filterPanel,
+                                AccountSelectionModel accountSelectionModel) {
         this.tablePanel = tablePanel;
         this.tableModel = tableModel;
         this.tradeDataModel = tradeDataModel;
         this.filterPanel = filterPanel;
+        this.accountSelectionModel = accountSelectionModel;
 
         tradeDataModel.addPropertyChangeListener(TradeDataModel.TRADES_PROPERTY, this);
 
         initializeFilterListeners();
 
-        applyFilters();
+        applyDateFilter();
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent event) {
         if (TradeDataModel.TRADES_PROPERTY.equals(event.getPropertyName())) {
-            applyFilters();
+            applyDateFilter();
+        }
+
+        if (accountSelectionModel.ACCOUNT_SELECTED_PROPERTY.equals(event.getPropertyName())) {
+            applyAccountFilter();
         }
     }
 
     private void initializeFilterListeners() {
-        filterPanel.getSearchByDateButton().addActionListener(e -> applyFilters());
+        filterPanel.getSearchByDateButton().addActionListener(e -> applyDateFilter());
     }
 
-    // Apply all used filters
-    private void applyFilters() {
+    // Apply fitlering by account
+    private void applyAccountFilter() {
+        List<Trade> trades = tradeDataModel.getTrades();
+
+    }
+
+    // Apply date range filters
+    private void applyDateFilter() {
         List<Trade> trades = tradeDataModel.getTrades();
         currentStartDate = getDateFromField(filterPanel.getStartDateField());
         currentEndDate = getDateFromField(filterPanel.getEndDateField());
@@ -89,7 +101,7 @@ public class TradeTableController implements PropertyChangeListener {
         filterPanel.clearStartDateTextField();
         filterPanel.clearEndDateTextField();
 
-         applyFilters();
+        applyDateFilter();
     }
 
     // Helper method for parsing date from JTextField
