@@ -30,10 +30,11 @@ public class LoginPanel extends JPanel {
         accountPasswordField = new JFormattedTextField();
         accountInvestorField = new JFormattedTextField();
         addAccountButton = new JButton();
+        removeAccountButton = new JButton();
 
         //======== this ========
         setBorder(new EmptyBorder(10, 10, 10, 10));
-        setLayout(new GridLayout(8, 1, 0, 10));
+        setLayout(new GridLayout(9, 1, 0, 10));
 
         //---- addAccountLabel ----
         addAccountLabel.setText("Add Account");
@@ -102,6 +103,11 @@ public class LoginPanel extends JPanel {
         addAccountButton.setBackground(new Color(0xcccccc));
         addAccountButton.setBorder(new SoftBevelBorder(SoftBevelBorder.LOWERED));
         add(addAccountButton);
+
+        //---- removeAccountButton ----
+        removeAccountButton.setText("Remove an Account");
+        removeAccountButton.setFont(new Font("IBM Plex Mono", Font.BOLD, 24));
+        add(removeAccountButton);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
@@ -115,6 +121,7 @@ public class LoginPanel extends JPanel {
     private JFormattedTextField accountPasswordField;
     private JFormattedTextField accountInvestorField;
     private JButton addAccountButton;
+    private JButton removeAccountButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 
     // START GETTERS
@@ -145,6 +152,8 @@ public class LoginPanel extends JPanel {
     public JButton getAddAccountButton() {
         return addAccountButton;
     }
+    
+    public JButton getRemoveAccountButton() { return removeAccountButton; }
     // END GETTERS
 
     // Determine account type

@@ -46,9 +46,32 @@ public class AccountsTableController implements PropertyChangeListener {
         }
     }
 
+    // Handle account removal
+    private void handleRemoveAccount() {
+        String loginInputPane = JOptionPane.showInputDialog(loginPanel, "Input account login for removal");
+//        System.out.println(account.toString());
+
+        if (loginInputPane == null) {
+            return;
+        } else if (loginInputPane.isEmpty()) {
+            JOptionPane.showMessageDialog(loginPanel,
+                    "Account with login \"" + loginInputPane + "\" not found.",
+                    "Account not found",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
+        try {
+            accountManagementService.removeAccount(loginInputPane);
+            model.setAccounts(accountManagementService.getAccounts());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(loginPanel, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     // Add "add account" button listener
     private void initializeElementListeners() {
         loginPanel.getAddAccountButton().addActionListener(e -> handleAddAccount());
+        loginPanel.getRemoveAccountButton().addActionListener(e -> handleRemoveAccount());
     }
 
     @Override

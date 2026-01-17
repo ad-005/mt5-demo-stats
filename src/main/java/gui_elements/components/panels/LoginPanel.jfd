@@ -5,7 +5,7 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) {
 			"columns": 1
-			"rows": 8
+			"rows": 9
 			"vgap": 10
 		} ) {
 			name: "this"
@@ -77,6 +77,11 @@ new FormModel {
 				"font": new java.awt.Font( "IBM Plex Mono", 1, 24 )
 				"background": new java.awt.Color( 204, 204, 204, 255 )
 				"border": new javax.swing.border.SoftBevelBorder( 1, null, null, null, null )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "removeAccountButton"
+				"text": "Remove an Account"
+				"font": new java.awt.Font( "IBM Plex Mono", 1, 24 )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 110, 85 )
