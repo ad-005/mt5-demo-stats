@@ -6,17 +6,31 @@ new FormModel {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 			"$layoutConstraints": "btt,insets panel,hidemode 3,align center center,gap 5 5"
 			"$columnConstraints": "[527,grow,fill]"
-			"$rowConstraints": "[grow,fill][][][][][]"
+			"$rowConstraints": "[grow,fill][][][][][][]"
 		} ) {
 			name: "this"
 			"border": new javax.swing.border.EmptyBorder( 5, 5, 5, 5 )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "accountComboBox"
+				"font": new java.awt.Font( "IBM Plex Mono", 1, 12 )
+				"toolTipText": "Pick an account for which to show trades."
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "pad 0,cell 0 2,alignx center,growx 0"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "Search by account"
+				"font": new java.awt.Font( "IBM Plex Mono", 1, 16 )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 3,alignx center,growx 0"
+			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "searchByDateButton"
 				"text": "Search"
 				"font": new java.awt.Font( "IBM Plex Mono", 1, 14 )
 				"autoscrolls": true
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 1,alignx center,growx 0,wmin 100"
+				"value": "cell 0 4,alignx center,growx 0,wmin 100"
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "startDateTextField"
@@ -26,7 +40,7 @@ new FormModel {
 				"horizontalAlignment": 0
 				"toolTipText": "Format: DD-MM-YYYY"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 2,dock center,wmin 220"
+				"value": "cell 0 5,dock center,wmin 220"
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "endDateTextField"
@@ -35,7 +49,7 @@ new FormModel {
 				"horizontalAlignment": 0
 				"toolTipText": "Format: DD-MM-YYYY"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 2,dock center,wmin 220"
+				"value": "cell 0 5,dock center,wmin 220"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "startDateLabel"
@@ -43,7 +57,7 @@ new FormModel {
 				"font": new java.awt.Font( "IBM Plex Mono", 1, 14 )
 				"horizontalAlignment": 0
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "pad 0,cell 0 3,dock center"
+				"value": "pad 0,cell 0 6,dock center"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "endDateLabel"
@@ -51,21 +65,21 @@ new FormModel {
 				"font": new java.awt.Font( "IBM Plex Mono", 1, 14 )
 				"horizontalAlignment": 0
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "pad 0,cell 0 3,dock center"
+				"value": "pad 0,cell 0 6,dock center"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "searchByDateLabel"
 				"text": "Search by date"
 				"font": new java.awt.Font( "IBM Plex Mono", 1, 16 )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 4,alignx center,growx 0"
+				"value": "cell 0 7,alignx center,growx 0"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "tradesShownLabel"
 				"text": "Showing n out of n trades"
 				"font": new java.awt.Font( "IBM Plex Mono", 0, 12 )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 5"
+				"value": "cell 0 8"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 120, 70 )
