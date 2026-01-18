@@ -32,8 +32,9 @@ public class SearchPage extends JPanel {
 
     }
 
-    public SearchPage(TradeDataModel tradeDataModel) {
+    public SearchPage(TradeDataModel tradeDataModel, AccountSelectionModel accountSelectionModel) {
         this.tradeDataModel = tradeDataModel;
+        this.accountSelectionModel = accountSelectionModel;
         initComponents();
         initializeModels();
         initializeControllers();
@@ -65,7 +66,6 @@ public class SearchPage extends JPanel {
 
     private void initializeModels() {
         tradeTableModel = new TradeTableModel();
-        accountSelectionModel = new AccountSelectionModel();
         tradeTable1.setTableModel(tradeTableModel);
 
         List<Trade> initialTrades = MockDataFactory.generateTrades(200);

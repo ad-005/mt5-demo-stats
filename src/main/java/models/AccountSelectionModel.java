@@ -15,6 +15,7 @@ public class AccountSelectionModel {
     private Account selectedAccount = ALL_ACCOUNTS;
 
     public static final String ACCOUNT_SELECTED_PROPERTY = "accountSelected";
+    public static final String AVAILABLE_ACCOUNTS_PROPERTY = "availableAccounts";
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     // Constructor
@@ -44,8 +45,10 @@ public class AccountSelectionModel {
     }
 
     public void setAccounts(List<Account> accounts) {
+        List<Account> oldValue = new ArrayList<>(this.accounts);
         this.accounts.clear();
         this.accounts.addAll(accounts);
+        pcs.firePropertyChange(AVAILABLE_ACCOUNTS_PROPERTY, oldValue, accounts);
     }
     // END SETTERS
 

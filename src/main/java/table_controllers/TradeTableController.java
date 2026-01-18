@@ -41,42 +41,47 @@ public class TradeTableController implements PropertyChangeListener {
         this.accountSelectionModel = accountSelectionModel;
 
         tradeDataModel.addPropertyChangeListener(TradeDataModel.TRADES_PROPERTY, this);
+        accountSelectionModel.addPropertyChangeListener(AccountSelectionModel.ACCOUNT_SELECTED_PROPERTY, this);
 
         initializeFilterListeners();
-
-        applyDateFilter();
+        applyFilters();
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent event) {
-        if (TradeDataModel.TRADES_PROPERTY.equals(event.getPropertyName())) {
-            applyDateFilter();
-        }
-
-        if (accountSelectionModel.ACCOUNT_SELECTED_PROPERTY.equals(event.getPropertyName())) {
-            applyAccountFilter();
+        if (TradeDataModel.TRADES_PROPERTY.equals(event.getPropertyName()) ||
+            AccountSelectionModel.ACCOUNT_SELECTED_PROPERTY.equals(event.getPropertyName())) {
+            applyFilters();
         }
     }
 
     private void initializeFilterListeners() {
-        filterPanel.getSearchByDateButton().addActionListener(e -> applyDateFilter());
+        filterPanel.getSearchByDateButton().addActionListener(e -> applyFilters());
     }
 
-    // Apply fitlering by account
-    private void applyAccountFilter() {
+    // Apply filtering
+    private void applyFilters() {
         List<Trade> trades = tradeDataModel.getTrades();
 
-    }
+        List<Trade> accountFiltered = filterByAccount(trades);
 
-    // Apply date range filters
-    private void applyDateFilter() {
-        List<Trade> trades = tradeDataModel.getTrades();
         currentStartDate = getDateFromField(filterPanel.getStartDateField());
         currentEndDate = getDateFromField(filterPanel.getEndDateField());
 
-        List<Trade> filteredTrades = trades.stream().filter(this::matchesDateRangeFilter).toList();
+        List<Trade> filteredTrades = accountFiltered.stream().filter(this::matchesDateRangeFilter).toList();
         tableModel.setTrades(filteredTrades);
         filterPanel.setTradesShownText(filteredTrades.size(), trades.size());
+
+    }
+
+    // Helper method for returning a list matching the account
+    private List<Trade> filterByAccount(List<Trade> trades) {
+        if (accountSelectionModel.isAllAccountsSelected()) {
+            return trades;
+        }
+
+        String selectedLogin = accountSelectionModel.getSelectedAccount().getLogin();
+        return trades.stream().filter(trade -> trade.getAccountLogin().equals(selectedLogin)).toList();
     }
 
     private boolean matchesDateRangeFilter(Trade trade) {
@@ -101,7 +106,7 @@ public class TradeTableController implements PropertyChangeListener {
         filterPanel.clearStartDateTextField();
         filterPanel.clearEndDateTextField();
 
-        applyDateFilter();
+        applyFilters();
     }
 
     // Helper method for parsing date from JTextField

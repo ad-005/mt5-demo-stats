@@ -17,6 +17,7 @@ import javax.swing.border.*;
  */
 public class AccountSelectionPanel extends JPanel {
     private AccountSelectionModel model;
+    private boolean isUpdating = false;
 
     public AccountSelectionPanel() {
         initComponents();
@@ -64,18 +65,35 @@ public class AccountSelectionPanel extends JPanel {
     }
 
     private void populateComboBox() {
-        accountComboBox.removeAllItems();
-        accountComboBox.addItem(null);
+        isUpdating = true;
+        try {
+            Account currentSelection = model.getSelectedAccount();
 
-        for (Account account : model.getAccounts()) {
-            accountComboBox.addItem(account);
+            accountComboBox.removeAllItems();
+            accountComboBox.addItem(null);
+
+            for (Account account : model.getAccounts()) {
+                accountComboBox.addItem(account);
+            }
+
+            if (currentSelection != null && model.getAccounts().contains(currentSelection)) {
+                accountComboBox.setSelectedItem(currentSelection);
+            } else {
+                accountComboBox.setSelectedItem(null);
+                model.setSelectedAccount(null);
+            }
+        } finally {
+            isUpdating = false;
         }
-        accountComboBox.setSelectedItem(model.getSelectedAccount());
     }
 
     private void bindListeners() {
         accountComboBox.addActionListener(e -> {
-            model.setSelectedAccount((Account) accountComboBox.getSelectedItem());
+            if (model != null && !isUpdating) {
+                Account selected = (Account) accountComboBox.getSelectedItem();
+//                System.out.println("Account selected: " + (selected == null ? "All" : selected.getLogin()));
+                model.setSelectedAccount(selected);
+            }
         });
 
         model.addPropertyChangeListener(
@@ -85,6 +103,12 @@ public class AccountSelectionPanel extends JPanel {
                     if (accountComboBox.getSelectedItem() != newSelection) {
                         accountComboBox.setSelectedItem(newSelection);
                     }
+                }
+        );
+
+        model.addPropertyChangeListener(AccountSelectionModel.AVAILABLE_ACCOUNTS_PROPERTY,
+                evt -> {
+                    populateComboBox();
                 }
         );
     }

@@ -36,10 +36,12 @@ public class MainViewPanel extends JPanel {
 
     public MainViewPanel() {
         this.accountFetchingService = new AccountFetchingService();
-        accountManagementService = new AccountManagementService(accountFetchingService);
 
         initModels();
         initComponents();
+
+        accountsPage1.setAccountManagementService(accountManagementService);
+
         initControllers();
         bindAccountSelection();
 
@@ -53,8 +55,8 @@ public class MainViewPanel extends JPanel {
         // Generated using JFormDesigner Educational license - Antonije Dragicevic
         contentPanel = new JPanel();
         homePage1 = new HomePage();
-        searchPage1 = new SearchPage(sharedTradeDataModel);
-        accountsPage1 = new AccountsPage();
+        searchPage1 = new SearchPage(sharedTradeDataModel, sharedAccountSelectionModel);
+        accountsPage1 = new AccountsPage(accountManagementService);
         selectionPanel1 = new SelectionPanel();
 
         //======== this ========
@@ -90,6 +92,10 @@ public class MainViewPanel extends JPanel {
     private void initModels() {
         sharedTradeDataModel = new TradeDataModel();
         sharedAccountSelectionModel = new AccountSelectionModel();
+        accountManagementService = new AccountManagementService(
+                accountFetchingService,
+                sharedAccountSelectionModel
+        );
 
         List<Account> accounts = accountManagementService.getAccounts();
         sharedAccountSelectionModel.setAccounts(accounts);
