@@ -14,7 +14,7 @@ import java.util.function.Function;
 public class AccountsTableModel extends AbstractTableModel {
     public enum TradeColumn {
         NAME("Name", String.class, Account::getName),
-        TYPE("Type", AccountType.class, Account::getType),
+        TYPE("Type", String.class, Account::getTypeName),
         SERVER("Server", String.class, Account::getServer),
         LOGIN("Login", String.class, Account::getLogin),
         PASSWORD("Password", String.class, Account::getPassword),

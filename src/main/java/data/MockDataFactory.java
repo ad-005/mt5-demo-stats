@@ -81,8 +81,12 @@ public class MockDataFactory {
     // Get random account login
     public static String getRandomAccountLogin() {
         List<Account> availableAccounts = accountManagementService.getAccounts();
-        int accountIndex = ThreadLocalRandom.current().nextInt(availableAccounts.size());
 
+        if (availableAccounts.isEmpty()) {
+            return "GenericLogin";
+        }
+
+        int accountIndex = ThreadLocalRandom.current().nextInt(availableAccounts.size());
         return availableAccounts.get(accountIndex).getLogin();
     }
 

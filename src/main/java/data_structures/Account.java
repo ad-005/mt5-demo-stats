@@ -23,6 +23,9 @@ public class Account {
     // START GETTERS
     public String getName() { return name; }
     public AccountType getType() { return type; }
+    public String getTypeName() {
+        return (getType() == null) ? "Undefined" : type.typeName;
+    }
     public String getServer() { return server; }
     public String getLogin() { return login; }
     public String getPassword() { return password; }
