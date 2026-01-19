@@ -1,15 +1,22 @@
 package services;
 
 import data_structures.Account;
+import models.AccountSelectionModel;
 
 import java.util.List;
 import java.util.Optional;
 
 public class AccountManagementService {
     private final AccountFetchingService fetchingService;
+    private AccountSelectionModel accountSelectionModel;
 
-    public AccountManagementService(AccountFetchingService fetchingService) {
+    public AccountManagementService(AccountFetchingService fetchingService, AccountSelectionModel accountSelectionModel) {
         this.fetchingService = fetchingService;
+        this.accountSelectionModel = accountSelectionModel;
+    }
+
+    public AccountManagementService(AccountFetchingService accountFetchingService) {
+        this(accountFetchingService, null);
     }
 
     // Get all accounts
@@ -29,6 +36,7 @@ public class AccountManagementService {
 
         accounts.add(account);
         fetchingService.saveAccounts(accounts);
+        accountSelectionModel.setAccounts(accounts);
     }
 
     // Remove an account
@@ -44,6 +52,7 @@ public class AccountManagementService {
 
         accounts.remove(account);
         fetchingService.saveAccounts(accounts);
+        accountSelectionModel.setAccounts(accounts);
     }
 
     // Get an Account by its Login
@@ -51,5 +60,9 @@ public class AccountManagementService {
         return accounts.stream().filter(account -> account.getLogin().equals(login))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public void setSelectionModel(AccountSelectionModel accountSelectionModel) {
+        this.accountSelectionModel = accountSelectionModel;
     }
 }

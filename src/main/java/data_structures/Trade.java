@@ -20,6 +20,7 @@ public class Trade {
     private double closePrice;
     private double profit;
     private double change;
+    private String accountLogin;
     // END ATTRIBUTES
 
     // START TEST ATTRIBUTES
@@ -29,7 +30,7 @@ public class Trade {
     // START CONSTRUCTOR
     public Trade(LocalDateTime openTime, TradeSymbol symbol, String ticket, TradeType type, double volume,
                  double openPrice, double stopLoss, double takeProfit, LocalDateTime closeTime, double closePrice,
-                 double profit, double change) {
+                 double profit, double change, String accountLogin) {
         this.openTime = openTime;
         this.symbol = symbol;
         this.ticket = ticket;
@@ -42,6 +43,7 @@ public class Trade {
         this.closePrice = closePrice;
         this.profit = profit;
         this.change = change;
+        this.accountLogin = accountLogin;
         this.brokerTimeZone = ZoneId.of("UTC+3");
     }
     // END CONSTRUCTOR
@@ -59,6 +61,7 @@ public class Trade {
     public double getClosePrice() { return closePrice; }
     public double getProfit() { return profit; }
     public double getChange() { return change; }
+    public String getAccountLogin() { return accountLogin; }
     // END GETTERS
 
     // START TEST ATTRIBUTE GETTERS

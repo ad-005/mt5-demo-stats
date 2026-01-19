@@ -13,8 +13,12 @@ import java.time.format.DateTimeParseException;
 import javax.swing.*;
 import javax.swing.border.*;
 
+import data_structures.Account;
+import gui_elements.renderers.AccountComboBoxRenderer;
 import interfaces.ModelObserver;
 import net.miginfocom.swing.*;
+
+import java.util.List;
 
 import java.time.format.DateTimeFormatter;
 
@@ -23,6 +27,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class SearchFieldPanel extends JPanel implements ModelObserver {
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private DefaultComboBoxModel<Account> accountComboBoxModel;
 
     public SearchFieldPanel() {
         initComponents();
@@ -31,6 +36,8 @@ public class SearchFieldPanel extends JPanel implements ModelObserver {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Educational license - Antonije Dragicevic
+        accountSelectionPanel1 = new AccountSelectionPanel();
+        label1 = new JLabel();
         searchByDateButton = new JButton();
         startDateTextField = new JTextField();
         endDateTextField = new JTextField();
@@ -51,13 +58,20 @@ public class SearchFieldPanel extends JPanel implements ModelObserver {
             "[]" +
             "[]" +
             "[]" +
+            "[]" +
             "[]"));
+        add(accountSelectionPanel1, "cell 0 2");
+
+        //---- label1 ----
+        label1.setText("Search by account");
+        label1.setFont(new Font("IBM Plex Mono", Font.BOLD, 16));
+        add(label1, "cell 0 3,alignx center,growx 0");
 
         //---- searchByDateButton ----
         searchByDateButton.setText("Search");
         searchByDateButton.setFont(new Font("IBM Plex Mono", Font.BOLD, 14));
         searchByDateButton.setAutoscrolls(true);
-        add(searchByDateButton, "cell 0 1,alignx center,growx 0,wmin 100");
+        add(searchByDateButton, "cell 0 4,alignx center,growx 0,wmin 100");
 
         //---- startDateTextField ----
         startDateTextField.setFont(new Font("IBM Plex Mono", Font.PLAIN, 14));
@@ -65,41 +79,43 @@ public class SearchFieldPanel extends JPanel implements ModelObserver {
         startDateTextField.setText("DD-MM-YYYY");
         startDateTextField.setHorizontalAlignment(SwingConstants.CENTER);
         startDateTextField.setToolTipText("Format: DD-MM-YYYY");
-        add(startDateTextField, "cell 0 2,dock center,wmin 220");
+        add(startDateTextField, "cell 0 5,dock center,wmin 220");
 
         //---- endDateTextField ----
         endDateTextField.setText("DD-MM-YYYY");
         endDateTextField.setFont(new Font("IBM Plex Mono", Font.PLAIN, 14));
         endDateTextField.setHorizontalAlignment(SwingConstants.CENTER);
         endDateTextField.setToolTipText("Format: DD-MM-YYYY");
-        add(endDateTextField, "cell 0 2,dock center,wmin 220");
+        add(endDateTextField, "cell 0 5,dock center,wmin 220");
 
         //---- startDateLabel ----
         startDateLabel.setText("Start date");
         startDateLabel.setFont(new Font("IBM Plex Mono", Font.BOLD, 14));
         startDateLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        add(startDateLabel, "pad 0,cell 0 3,dock center");
+        add(startDateLabel, "pad 0,cell 0 6,dock center");
 
         //---- endDateLabel ----
         endDateLabel.setText("End date");
         endDateLabel.setFont(new Font("IBM Plex Mono", Font.BOLD, 14));
         endDateLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        add(endDateLabel, "pad 0,cell 0 3,dock center");
+        add(endDateLabel, "pad 0,cell 0 6,dock center");
 
         //---- searchByDateLabel ----
         searchByDateLabel.setText("Search by date");
         searchByDateLabel.setFont(new Font("IBM Plex Mono", Font.BOLD, 16));
-        add(searchByDateLabel, "cell 0 4,alignx center,growx 0");
+        add(searchByDateLabel, "cell 0 7,alignx center,growx 0");
 
         //---- tradesShownLabel ----
         tradesShownLabel.setText("Showing n out of n trades");
         tradesShownLabel.setFont(new Font("IBM Plex Mono", Font.PLAIN, 12));
-        add(tradesShownLabel, "cell 0 5");
+        add(tradesShownLabel, "cell 0 8");
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     // Generated using JFormDesigner Educational license - Antonije Dragicevic
+    private AccountSelectionPanel accountSelectionPanel1;
+    private JLabel label1;
     private JButton searchByDateButton;
     private JTextField startDateTextField;
     private JTextField endDateTextField;
@@ -125,6 +141,12 @@ public class SearchFieldPanel extends JPanel implements ModelObserver {
     public JLabel getTradesShownLabel() {
         return tradesShownLabel;
     }
+
+    public DefaultComboBoxModel<Account> getAccountComboBoxModel() {
+        return accountComboBoxModel;
+    }
+
+    public AccountSelectionPanel getAccountSelectionPanel() { return accountSelectionPanel1; }
     // END GETTERS
 
     // START SETTERS
@@ -138,8 +160,15 @@ public class SearchFieldPanel extends JPanel implements ModelObserver {
 
     public void setTradesShownText(int shown, int total) {
         tradesShownLabel.setText("Showing " + shown + " out of " + total + " trades");
+
     }
     // END SETTERS
+
+    // Helper method for setting account combo box properties
+//    private void setAccountComboBoxProperties() {
+//        accountComboBox.setRenderer(new AccountComboBoxRenderer());
+//        accountComboBox.setModel(accountComboBoxModel);
+//    }
 
     @Override
     public void modelPropertyChange(PropertyChangeEvent event) {

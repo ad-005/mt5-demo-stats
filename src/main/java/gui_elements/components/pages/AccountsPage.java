@@ -11,6 +11,7 @@ import data_structures.Account;
 import gui_elements.components.panels.LoginPanel;
 import gui_elements.tables.*;
 import models.AccountDataModel;
+import models.AccountSelectionModel;
 import services.AccountFetchingService;
 import services.AccountManagementService;
 import table_controllers.AccountsTableController;
@@ -26,8 +27,9 @@ public class AccountsPage extends JPanel {
     private AccountManagementService accountManagementService;
     private AccountFetchingService accountFetchingService;
 
-    public AccountsPage() {
+    public AccountsPage(AccountManagementService accountManagementService) {
         this.accountsTableModel = new AccountsTableModel();
+        this.accountManagementService = accountManagementService;
         initComponents();
         initializeModels();
         initializeControllers();
@@ -55,7 +57,7 @@ public class AccountsPage extends JPanel {
     private void initializeModels() {
         this.accountDataModel = new AccountDataModel();
         this.accountFetchingService = new AccountFetchingService();
-        this.accountManagementService = new AccountManagementService(accountFetchingService);
+//        this.accountManagementService = new AccountManagementService(accountFetchingService);
     }
 
     private void initializeControllers() {
@@ -65,5 +67,9 @@ public class AccountsPage extends JPanel {
                 loginPanel1,
                 accountManagementService
         );
+    }
+
+    public void setAccountManagementService(AccountManagementService accountManagementService) {
+        this.accountManagementService = accountManagementService;
     }
 }

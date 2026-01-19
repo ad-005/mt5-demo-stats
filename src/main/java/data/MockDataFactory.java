@@ -6,6 +6,8 @@ import data_structures.Session;
 import data_structures.Trade;
 import constants.TradeSymbol;
 import constants.TradeType;
+import services.AccountFetchingService;
+import services.AccountManagementService;
 import services.RandomDataService;
 
 import java.time.LocalDate;
@@ -19,6 +21,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class MockDataFactory {
     private static final Random random = new Random();
+    private static final AccountFetchingService accountFetchingService = new AccountFetchingService();
+    private static final AccountManagementService accountManagementService = new AccountManagementService(accountFetchingService);
 
     // Generate List of random Account
     public static List<Account> generateAccounts(int numberOfAccounts) {
@@ -68,9 +72,18 @@ public class MockDataFactory {
         double closePrice = generateClosePrice(stopLoss, takeProfit);
         double profit = calculateProfit(openPrice, closePrice, volume, type);
         double change = calculateChange(type, openPrice, closePrice);
+        String login = getRandomAccountLogin();
 
         return new Trade(openTime, symbol, ticket, type, volume, openPrice,
-                stopLoss, takeProfit, closeTime, closePrice, profit, change);
+                stopLoss, takeProfit, closeTime, closePrice, profit, change, getRandomAccountLogin());
+    }
+
+    // Get random account login
+    public static String getRandomAccountLogin() {
+        List<Account> availableAccounts = accountManagementService.getAccounts();
+        int accountIndex = ThreadLocalRandom.current().nextInt(availableAccounts.size());
+
+        return availableAccounts.get(accountIndex).getLogin();
     }
 
     // Calculate change (change in price from open to close)

@@ -115,22 +115,22 @@ public class SessionWinratesCustomPanel extends JPanel implements PropertyChange
         if ("sessionStats".equals(event.getPropertyName())) {
             Map<TradingSession, Session> sessionMap = (HashMap<TradingSession, Session>) event.getNewValue();
 
-            Session asianData = sessionMap.get(TradingSession.ASIAN);
+            Session asianData = sessionMap.getOrDefault(TradingSession.ASIAN, new Session(0, 0, 0, 0.0));
             asianSessionLabel.setText(TradingSession.ASIAN.sessionName);
             asianSessionBar.setValue((int) asianData.getWinrate());
             asianWinrateLabel.setText(String.format("%.2f %%", asianData.getWinrate()));
 
-            Session sydneyData = sessionMap.get(TradingSession.SYDNEY);
+            Session sydneyData = sessionMap.getOrDefault(TradingSession.SYDNEY, new Session(0, 0, 0, 0.0));
             sydneySessionLabel.setText(TradingSession.SYDNEY.sessionName);
             sydneySessionBar.setValue((int) sydneyData.getWinrate());
             sydneyWinrateLabel.setText(String.format("%.2f %%", sydneyData.getWinrate()));
 
-            Session londonData = sessionMap.get(TradingSession.LONDON);
+            Session londonData = sessionMap.getOrDefault(TradingSession.LONDON, new Session(0, 0, 0, 0.0));
             londonSessionLabel.setText(TradingSession.LONDON.sessionName);
             londonSessionBar.setValue((int) londonData.getWinrate());
             londonWinrateLabel.setText(String.format("%.2f %%", londonData.getWinrate()));
 
-            Session newyorkData = sessionMap.get(TradingSession.NEW_YORK);
+            Session newyorkData = sessionMap.getOrDefault(TradingSession.NEW_YORK, new Session(0, 0, 0, 0.0));
             newyorkSessionLabel.setText(TradingSession.NEW_YORK.sessionName);
             newyorkSessionBar.setValue((int) newyorkData.getWinrate());
             newyorkWinrateLabel.setText(String.format("%.2f %%", newyorkData.getWinrate()));
