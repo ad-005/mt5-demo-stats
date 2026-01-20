@@ -1,0 +1,29 @@
+JFDML JFormDesigner: "8.3" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) {
+			"columns": 1
+			"rows": 2
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "purposeLabel"
+				"text": "Choose a session to display information for"
+				"font": new java.awt.Font( "IBM Plex Mono", 1, 12 )
+				"horizontalAlignment": 0
+				"verticalAlignment": 3
+				"border": new javax.swing.border.EmptyBorder( 0, 0, 10, 0 )
+				"background": new java.awt.Color( 255, 255, 255, 255 )
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "sessionComboBox"
+				"font": new java.awt.Font( "IBM Plex Mono", 1, 14 )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 240, 220 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}

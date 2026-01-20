@@ -36,6 +36,7 @@ public class SearchFieldPanel extends JPanel implements ModelObserver {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Educational license - Antonije Dragicevic
+        sessionSelectionPanel1 = new SessionSelectionPanel();
         accountSelectionPanel1 = new AccountSelectionPanel();
         label1 = new JLabel();
         searchByDateButton = new JButton();
@@ -60,6 +61,7 @@ public class SearchFieldPanel extends JPanel implements ModelObserver {
             "[]" +
             "[]" +
             "[]"));
+        add(sessionSelectionPanel1, "cell 0 1");
         add(accountSelectionPanel1, "cell 0 2");
 
         //---- label1 ----
@@ -114,6 +116,7 @@ public class SearchFieldPanel extends JPanel implements ModelObserver {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     // Generated using JFormDesigner Educational license - Antonije Dragicevic
+    private SessionSelectionPanel sessionSelectionPanel1;
     private AccountSelectionPanel accountSelectionPanel1;
     private JLabel label1;
     private JButton searchByDateButton;
@@ -147,6 +150,8 @@ public class SearchFieldPanel extends JPanel implements ModelObserver {
     }
 
     public AccountSelectionPanel getAccountSelectionPanel() { return accountSelectionPanel1; }
+
+    public SessionSelectionPanel getSessionSelectionPanel() { return sessionSelectionPanel1; }
     // END GETTERS
 
     // START SETTERS

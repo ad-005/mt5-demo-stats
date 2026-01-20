@@ -1,9 +1,12 @@
 package table_controllers;
 
+import constants.TradingSession;
 import data_structures.Trade;
 import gui_elements.components.panels.SearchFieldPanel;
 import models.AccountSelectionModel;
+import models.SessionSelectionModel;
 import models.TradeDataModel;
+import services.TradeStatisticsService;
 import table_models.TradeTableModel;
 
 import javax.swing.*;
@@ -23,6 +26,8 @@ public class TradeTableController implements PropertyChangeListener {
     private final TradeDataModel tradeDataModel;
     private final SearchFieldPanel filterPanel;
     private final AccountSelectionModel accountSelectionModel;
+    private final SessionSelectionModel sessionSelectionModel;
+    private final TradeStatisticsService tradeStatisticsService = new TradeStatisticsService();
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static final String DATE_PLACEHOLDER = "DD-MM-YYYY";
@@ -33,15 +38,17 @@ public class TradeTableController implements PropertyChangeListener {
 
     public TradeTableController(JTable tablePanel, TradeTableModel tableModel,
                                 TradeDataModel tradeDataModel, SearchFieldPanel filterPanel,
-                                AccountSelectionModel accountSelectionModel) {
+                                AccountSelectionModel accountSelectionModel, SessionSelectionModel sessionSelectionModel) {
         this.tablePanel = tablePanel;
         this.tableModel = tableModel;
         this.tradeDataModel = tradeDataModel;
         this.filterPanel = filterPanel;
         this.accountSelectionModel = accountSelectionModel;
+        this.sessionSelectionModel = sessionSelectionModel;
 
         tradeDataModel.addPropertyChangeListener(TradeDataModel.TRADES_PROPERTY, this);
         accountSelectionModel.addPropertyChangeListener(AccountSelectionModel.ACCOUNT_SELECTED_PROPERTY, this);
+        sessionSelectionModel.addPropertyChangeListener(SessionSelectionModel.SESSION_SELECTED_PROPERTY, this);
 
         initializeFilterListeners();
         applyFilters();
@@ -50,7 +57,8 @@ public class TradeTableController implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent event) {
         if (TradeDataModel.TRADES_PROPERTY.equals(event.getPropertyName()) ||
-            AccountSelectionModel.ACCOUNT_SELECTED_PROPERTY.equals(event.getPropertyName())) {
+            AccountSelectionModel.ACCOUNT_SELECTED_PROPERTY.equals(event.getPropertyName()) ||
+            SessionSelectionModel.SESSION_SELECTED_PROPERTY.equals(event.getPropertyName())) {
             applyFilters();
         }
     }
@@ -68,10 +76,22 @@ public class TradeTableController implements PropertyChangeListener {
         currentStartDate = getDateFromField(filterPanel.getStartDateField());
         currentEndDate = getDateFromField(filterPanel.getEndDateField());
 
-        List<Trade> filteredTrades = accountFiltered.stream().filter(this::matchesDateRangeFilter).toList();
+        List<Trade> dateFiltered = accountFiltered.stream().filter(this::matchesDateRangeFilter).toList();
+        List<Trade> filteredTrades = filterBySession(dateFiltered);
+
         tableModel.setTrades(filteredTrades);
         filterPanel.setTradesShownText(filteredTrades.size(), trades.size());
 
+    }
+
+    // Helper method for returning a list matching the session
+    private List<Trade> filterBySession(List<Trade> trades) {
+        if (sessionSelectionModel.isAllSessionsSelected()) {
+            return trades;
+        }
+
+        TradingSession selectedSession = sessionSelectionModel.getSelectedSession();
+        return trades.stream().filter(trade -> tradeStatisticsService.determineSession(trade).equals(selectedSession)).toList();
     }
 
     // Helper method for returning a list matching the account
