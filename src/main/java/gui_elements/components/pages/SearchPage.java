@@ -12,6 +12,7 @@ import data_structures.Trade;
 import gui_elements.components.panels.SearchFieldPanel;
 import gui_elements.tables.*;
 import models.AccountSelectionModel;
+import models.SessionSelectionModel;
 import models.TradeDataModel;
 import table_controllers.TradeTableController;
 import table_models.TradeTableModel;
@@ -27,6 +28,7 @@ public class SearchPage extends JPanel {
     private TradeTableModel tradeTableModel;
     private TradeTableController tradeTableController;
     private AccountSelectionModel accountSelectionModel;
+    SessionSelectionModel sessionSelectionModel;
 
     private SearchPage() {
 
@@ -66,6 +68,8 @@ public class SearchPage extends JPanel {
 
     private void initializeModels() {
         tradeTableModel = new TradeTableModel();
+        sessionSelectionModel = new SessionSelectionModel();
+        searchFieldPanel1.getSessionSelectionPanel().setSessionSelectionModel(sessionSelectionModel);
         tradeTable1.setTableModel(tradeTableModel);
 
         List<Trade> initialTrades = MockDataFactory.generateTrades(200);
@@ -78,7 +82,8 @@ public class SearchPage extends JPanel {
                 tradeTableModel,
                 tradeDataModel,
                 searchFieldPanel1,
-                accountSelectionModel
+                accountSelectionModel,
+                sessionSelectionModel
         );
 
     }

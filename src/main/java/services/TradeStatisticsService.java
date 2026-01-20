@@ -53,13 +53,15 @@ public class TradeStatisticsService {
         return result;
     }
 
-    private TradingSession determineSession(Trade trade) {
+    public TradingSession determineSession(Trade trade) {
         ZonedDateTime tradeTimeUTC = trade.getOpenTime().atZone(trade.getBrokerTimeZone()).withZoneSameInstant(ZoneId.of("UTC"));
 
         LocalTime utcTime = tradeTimeUTC.toLocalTime();
 
-        if (utcTime.isAfter(LocalTime.of(23, 0)) || utcTime.isBefore(LocalTime.of(8, 0))) {
+        if (utcTime.isBefore(LocalTime.of(7, 0))) {
             return TradingSession.ASIAN;
+        } else if (utcTime.isBefore(LocalTime.of(12, 0))) {
+            return TradingSession.LONDON;
         } else if (utcTime.isBefore(LocalTime.of(16, 0))) {
             return TradingSession.LONDON;
         } else if (utcTime.isBefore(LocalTime.of(21, 0))) {

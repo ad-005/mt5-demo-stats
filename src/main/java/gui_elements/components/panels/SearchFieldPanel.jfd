@@ -10,6 +10,11 @@ new FormModel {
 		} ) {
 			name: "this"
 			"border": new javax.swing.border.EmptyBorder( 5, 5, 5, 5 )
+			add( new FormComponent( "gui_elements.components.panels.SessionSelectionPanel" ) {
+				name: "sessionSelectionPanel1"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 1"
+			} )
 			add( new FormComponent( "gui_elements.components.panels.AccountSelectionPanel" ) {
 				name: "accountSelectionPanel1"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
@@ -80,7 +85,7 @@ new FormModel {
 				"value": "cell 0 8"
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 120, 70 )
+			"location": new java.awt.Point( 120, 65 )
 			"size": new java.awt.Dimension( 735, 545 )
 		} )
 	}
