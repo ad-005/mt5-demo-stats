@@ -1,7 +1,6 @@
 package gui_elements.components.elements;
 
-import constants.UIConstants;
-
+import constants.Theme;
 
 import javax.swing.JProgressBar;
 import javax.swing.event.ChangeEvent;
@@ -27,7 +26,7 @@ public class WinrateProgressBar extends JProgressBar {
     }
 
     private void determineColorBasedOnValue() {
-        setForeground((this.getValue() > 50) ? UIConstants.PROFIT_GREEN_COLOR : UIConstants.LOSS_RED_COLOR);
+        setForeground((this.getValue() > 50) ? Theme.Colors.SUCCESS : Theme.Colors.DANGER);
     }
 
     @Override
