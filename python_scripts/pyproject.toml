@@ -1,0 +1,9 @@
+[project]
+name = "mt5-demo-stats"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.14"
+dependencies = [
+    "metatrader5>=5.0.5509",
+    "pandas>=3.0.0",
+]
