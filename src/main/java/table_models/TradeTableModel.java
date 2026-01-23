@@ -7,15 +7,19 @@ import constants.TradeType;
 
 import javax.swing.table.AbstractTableModel;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
 public class TradeTableModel extends AbstractTableModel {
 
+    private static final DateTimeFormatter DATE_TIME_FORMATTER =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
     public enum TradeColumn {
 
-        OPEN_TIME("Open Time", LocalDateTime.class, Trade::getOpenTime),
+        OPEN_TIME("Open Time", String.class, t -> formatDateTime(t.getOpenTime())),
         SYMBOL("Symbol", TradeSymbol.class, Trade::getSymbol),
         TICKET("Ticket", String.class, Trade::getTicket),
         TYPE("Type", TradeType.class, Trade::getType),
@@ -23,7 +27,7 @@ public class TradeTableModel extends AbstractTableModel {
         OPEN_PRICE("Open Price", Double.class, Trade::getOpenPrice),
         STOP_LOSS("S/L", Double.class, Trade::getStopLoss),
         TAKE_PROFIT("T/P", Double.class, Trade::getTakeProfit),
-        CLOSE_TIME("Close Time", LocalDateTime.class, Trade::getCloseTime),
+        CLOSE_TIME("Close Time", String.class, t -> formatDateTime(t.getCloseTime())),
         CLOSE_PRICE("Close Price", Double.class, Trade::getClosePrice),
         PROFIT("Profit", Double.class, Trade::getProfit),
         CHANGE("Change", Double.class, Trade::getChange);
@@ -41,6 +45,10 @@ public class TradeTableModel extends AbstractTableModel {
         public Object getValue(Trade trade) {
             return extractor.apply(trade);
         }
+    }
+
+    private static String formatDateTime(LocalDateTime dateTime) {
+        return dateTime != null ? dateTime.format(DATE_TIME_FORMATTER) : null;
     }
 
 //    private final String[] columns = {"Open Time", "Symbol", "Ticket", "Type", "Volume", "Open Price", "S/L", "T/P",
