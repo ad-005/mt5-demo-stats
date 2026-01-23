@@ -24,7 +24,7 @@ public class Trade {
     // END ATTRIBUTES
 
     // START TEST ATTRIBUTES
-    private ZoneId brokerTimeZone;
+    private final ZoneId brokerTimeZone = ZoneId.of("UTC+3");
     // END TEST ATTRIBUTES
 
     // START CONSTRUCTOR
@@ -44,7 +44,6 @@ public class Trade {
         this.profit = profit;
         this.change = change;
         this.accountLogin = accountLogin;
-        this.brokerTimeZone = ZoneId.of("UTC+3");
     }
     // END CONSTRUCTOR
 
