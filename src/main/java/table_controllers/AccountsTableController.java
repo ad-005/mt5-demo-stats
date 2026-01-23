@@ -1,6 +1,7 @@
 package table_controllers;
 
 import data_structures.Account;
+import gui_elements.components.panels.AccountSelectionPanel;
 import gui_elements.components.panels.LoginPanel;
 import gui_elements.tables.AccountsTable;
 import models.AccountDataModel;
@@ -18,12 +19,17 @@ public class AccountsTableController implements PropertyChangeListener {
     private final AccountsTableModel tableModel;
     private final LoginPanel loginPanel;
     private final AccountManagementService accountManagementService;
+    private AccountSelectionPanel accountSelectionPanel;
+
+    private JComboBox accountComboBox;
 
     public AccountsTableController(AccountDataModel model, AccountsTableModel tableModel, LoginPanel loginPanel, AccountManagementService accountManagementService) {
         this.model = model;
         this.tableModel = tableModel;
         this.loginPanel = loginPanel;
         this.accountManagementService = accountManagementService;
+        this.accountSelectionPanel = new AccountSelectionPanel();
+        this.accountComboBox = accountSelectionPanel.getAccountComboBox();
         initializeElementListeners();
         model.addPropertyChangeListener("accounts", this);
         initializeData();
@@ -48,21 +54,38 @@ public class AccountsTableController implements PropertyChangeListener {
 
     // Handle account removal
     private void handleRemoveAccount() {
-        String loginInputPane = JOptionPane.showInputDialog(loginPanel, "Input account login for removal");
-//        System.out.println(account.toString());
+        accountComboBox.removeAllItems();
 
-        if (loginInputPane == null) {
-            return;
-        } else if (loginInputPane.isEmpty()) {
-            JOptionPane.showMessageDialog(loginPanel,
-                    "Account with login \"" + loginInputPane + "\" not found.",
-                    "Account not found",
-                    JOptionPane.ERROR_MESSAGE);
+        for (Account account : model.getAccounts()) {
+            accountComboBox.addItem(account);
         }
 
+        int loginSelectionPane = JOptionPane.showConfirmDialog(
+                loginPanel,
+                accountComboBox,
+                "Select account login for removal",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE
+        );
+//        String loginInputPane = JOptionPane.showInputDialog(loginPanel, "Input account login for removal");
+//        System.out.println(account.toString());
+
+//        if (loginInputPane == null) {
+//            return;
+//        } else if (loginInputPane.isEmpty()) {
+//            JOptionPane.showMessageDialog(loginPanel,
+//                    "Account with login \"" + loginInputPane + "\" not found.",
+//                    "Account not found",
+//                    JOptionPane.ERROR_MESSAGE);
+//        }
+
         try {
-            accountManagementService.removeAccount(loginInputPane);
-            model.setAccounts(accountManagementService.getAccounts());
+            if (loginSelectionPane == JOptionPane.OK_OPTION) {
+                String selectedLogin = ((Account) accountComboBox.getSelectedItem()).getLogin();
+
+                accountManagementService.removeAccount(selectedLogin);
+                model.setAccounts(accountManagementService.getAccounts());
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(loginPanel, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
