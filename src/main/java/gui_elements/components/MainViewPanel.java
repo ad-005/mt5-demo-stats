@@ -6,6 +6,7 @@ package gui_elements.components;
 
 
 import controllers.OverallStatsController;
+import data.TradeFetcher;
 import data_structures.Account;
 import gui_elements.components.pages.*;
 import gui_elements.components.pages.AccountsPage;
@@ -33,6 +34,7 @@ public class MainViewPanel extends JPanel {
     private AccountManagementService accountManagementService;
     private AccountFetchingService accountFetchingService;
     private OverallStatsController overallStatsController;
+    private TradeFetcher tradeFetcher = new TradeFetcher();
 
     public MainViewPanel() {
         this.accountFetchingService = new AccountFetchingService();
@@ -90,6 +92,8 @@ public class MainViewPanel extends JPanel {
 
     // Method for single source of truth model initialization
     private void initModels() {
+        tradeFetcher.fetchTrades();
+
         sharedTradeDataModel = new TradeDataModel();
         sharedAccountSelectionModel = new AccountSelectionModel();
         accountManagementService = new AccountManagementService(

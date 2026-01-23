@@ -54,6 +54,9 @@ public class TradeStatisticsService {
     }
 
     public TradingSession determineSession(Trade trade) {
+        if (trade.getOpenTime() == null || trade.getBrokerTimeZone() == null) {
+            return TradingSession.ASIAN;
+        }
         ZonedDateTime tradeTimeUTC = trade.getOpenTime().atZone(trade.getBrokerTimeZone()).withZoneSameInstant(ZoneId.of("UTC"));
 
         LocalTime utcTime = tradeTimeUTC.toLocalTime();

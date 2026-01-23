@@ -4,6 +4,8 @@ target/
 !**/src/test/**/target/
 .kotlin
 .env
+python_scripts/.venv/
+python_scripts/__pycache__/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

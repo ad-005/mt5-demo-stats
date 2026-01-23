@@ -7,7 +7,7 @@ package gui_elements.components.pages;
 import java.awt.*;
 import javax.swing.*;
 
-import data.MockDataFactory;
+import data.TradeFetcher;
 import data_structures.Trade;
 import gui_elements.components.panels.SearchFieldPanel;
 import gui_elements.tables.*;
@@ -18,7 +18,6 @@ import table_controllers.TradeTableController;
 import table_models.TradeTableModel;
 
 import java.util.List;
-import java.util.ArrayList;
 
 /**
  * @author root
@@ -29,6 +28,7 @@ public class SearchPage extends JPanel {
     private TradeTableController tradeTableController;
     private AccountSelectionModel accountSelectionModel;
     SessionSelectionModel sessionSelectionModel;
+    private TradeFetcher tradeFetcher;
 
     private SearchPage() {
 
@@ -69,11 +69,15 @@ public class SearchPage extends JPanel {
     private void initializeModels() {
         tradeTableModel = new TradeTableModel();
         sessionSelectionModel = new SessionSelectionModel();
+        tradeFetcher = new TradeFetcher();
         searchFieldPanel1.getSessionSelectionPanel().setSessionSelectionModel(sessionSelectionModel);
         tradeTable1.setTableModel(tradeTableModel);
 
-        List<Trade> initialTrades = MockDataFactory.generateTrades(200);
+        List<Trade> initialTrades = tradeFetcher.fetchTrades();
         tradeDataModel.setTrades(initialTrades);
+
+//        List<Trade> initialTrades = MockDataFactory.generateTrades(200);
+//        tradeDataModel.setTrades(initialTrades);
     }
 
     private void initializeControllers() {
