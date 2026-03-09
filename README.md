@@ -3,7 +3,7 @@
 ---
 
 This project is a precursor to the more advanced
-[MT5 Demo Account Statistics](https://github.com/AntDragD) project also on my account.
+[MT5 Demo Account Statistics](https://github.com/ad-005/MT5-Demo-Account-Statistics) project also on my account.
 Unlike that one, this application was written and architected by me from scratch.
 
 The motivation behind it is simple: MetaTrader 5's built-in reporting doesn't give you the kind of
