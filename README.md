@@ -8,7 +8,6 @@
 ![MigLayout](https://img.shields.io/badge/MigLayout-11.3-6DB33F?logoColor=white)
 ![Gson](https://img.shields.io/badge/Gson-2.11-4285F4?logo=google&logoColor=white)
 ![MetaTrader5](https://img.shields.io/badge/MetaTrader5-API-1A1A2E?logoColor=white)
-![pandas](https://img.shields.io/badge/pandas-3.0-150458?logo=pandas&logoColor=white)
 
 ---
 
