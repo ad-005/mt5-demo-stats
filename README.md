@@ -1,5 +1,14 @@
 # MT5 Demo Account Trading Statistics
 
+![Java](https://img.shields.io/badge/Java-25-orange?logo=openjdk&logoColor=white)
+![Maven](https://img.shields.io/badge/Maven-3-C71A36?logo=apachemaven&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.14-3776AB?logo=python&logoColor=white)
+![uv](https://img.shields.io/badge/uv-package%20manager-DE5FE9?logo=astral&logoColor=white)
+![FlatLaf](https://img.shields.io/badge/FlatLaf-3.7-4A90D9?logo=java&logoColor=white)
+![MigLayout](https://img.shields.io/badge/MigLayout-11.3-6DB33F?logoColor=white)
+![Gson](https://img.shields.io/badge/Gson-2.11-4285F4?logo=google&logoColor=white)
+![MetaTrader5](https://img.shields.io/badge/MetaTrader5-API-1A1A2E?logoColor=white)
+![pandas](https://img.shields.io/badge/pandas-3.0-150458?logo=pandas&logoColor=white)
 
 ---
 
