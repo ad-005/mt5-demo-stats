@@ -1,6 +1,5 @@
 # MT5 Demo Account Trading Statistics
 
-A desktop app that pulls closed-trade history from a live MetaTrader 5 terminal and presents winrates, session breakdowns, and per-account statistics in a clean, filterable interface.
 
 ---
 
