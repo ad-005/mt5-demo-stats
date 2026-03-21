@@ -59,10 +59,10 @@ public class DailyWinratesPanel extends JPanel implements PropertyChangeListener
 
         int renderedRows = 0;
         for (String day : DAY_ORDER) {
-            double pct = dailyWinRates.getOrDefault(day, 0.0);
-            if (pct <= 0.0) {
+            if (!dailyWinRates.containsKey(day)) {
                 continue;
             }
+            double pct = dailyWinRates.getOrDefault(day, 0.0);
 
             JLabel dayLabel = new JLabel(day);
             dayLabel.setFont(Theme.Fonts.LABEL_BOLD);
