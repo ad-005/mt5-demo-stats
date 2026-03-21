@@ -4,14 +4,15 @@ import data_structures.Account;
 import models.AccountSelectionModel;
 
 import java.util.List;
-import java.util.Optional;
 
 public class AccountManagementService {
     private final AccountFetchingService fetchingService;
+    private final StatsCacheService statsCacheService;
     private AccountSelectionModel accountSelectionModel;
 
     public AccountManagementService(AccountFetchingService fetchingService, AccountSelectionModel accountSelectionModel) {
         this.fetchingService = fetchingService;
+        this.statsCacheService = new StatsCacheService();
         this.accountSelectionModel = accountSelectionModel;
     }
 
@@ -36,13 +37,19 @@ public class AccountManagementService {
 
         accounts.add(account);
         fetchingService.saveAccounts(accounts);
-        accountSelectionModel.setAccounts(accounts);
+        if (accountSelectionModel != null) {
+            accountSelectionModel.setAccounts(accounts);
+        }
     }
 
     // Remove an account
     public void removeAccount(String login) {
         List<Account> accounts = getAccounts();
         Account account = getAccountByLogin(accounts, login);
+
+        if (account == null) {
+            throw new IllegalArgumentException("Account with Login \"" + login + "\" doesn't exist.");
+        }
 
         boolean exists = accounts.stream().anyMatch(acc -> acc.getLogin().equals(account.getLogin()));
 
@@ -52,7 +59,16 @@ public class AccountManagementService {
 
         accounts.remove(account);
         fetchingService.saveAccounts(accounts);
-        accountSelectionModel.setAccounts(accounts);
+        statsCacheService.remove(login);
+        if (accountSelectionModel != null) {
+            accountSelectionModel.setAccounts(accounts);
+        }
+
+        if (accountSelectionModel != null &&
+                accountSelectionModel.getSelectedAccount() != null &&
+                login.equals(accountSelectionModel.getSelectedAccount().getLogin())) {
+            accountSelectionModel.setSelectedAccount(null);
+        }
     }
 
     // Get an Account by its Login
