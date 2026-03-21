@@ -75,7 +75,7 @@ else:
         # Select and order columns to match Java Trade class
         output_columns = ['openTime', 'symbol', 'ticket', 'type', 'volume',
                           'openPrice', 'stopLoss', 'takeProfit', 'closeTime',
-                          'closePrice', 'profit', 'change', 'accountLogin']
+                          'closePrice', 'profit', 'commission', 'swap', 'change', 'accountLogin']
         trades = trades[output_columns]
 
         data = trades.to_json(orient='records')

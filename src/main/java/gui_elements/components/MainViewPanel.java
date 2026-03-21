@@ -114,6 +114,7 @@ public class MainViewPanel extends JPanel {
         );
 
         homePage1.setStatsController(overallStatsController);
+        overallStatsController.refreshStatistics();
     }
 
     private void bindAccountSelection() {

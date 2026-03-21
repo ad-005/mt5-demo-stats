@@ -11,7 +11,6 @@ import services.TradeStatisticsService;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -65,19 +64,15 @@ public class OverallStatsController implements PropertyChangeListener {
     }
 
     private TradeStatistics getAllAccountsAggregatedStats() {
-        Map<String, TradeStatistics> cachedByLogin = statsCacheService.loadAll();
         Set<String> activeLogins = accountSelectionModel.getAccounts().stream()
                 .map(Account::getLogin)
                 .collect(Collectors.toSet());
 
-        List<TradeStatistics> activeStats = new ArrayList<>();
-        for (Map.Entry<String, TradeStatistics> entry : cachedByLogin.entrySet()) {
-            if (activeLogins.contains(entry.getKey())) {
-                activeStats.add(entry.getValue());
-            }
-        }
-
-        return statisticsService.aggregateStatistics(activeStats);
+        List<Trade> activeTrades = tradeDataModel.getTrades().stream()
+                .filter(trade -> trade.getAccountLogin() != null && !trade.getAccountLogin().isBlank())
+                .filter(trade -> activeLogins.contains(trade.getAccountLogin()))
+                .toList();
+        return statisticsService.calculateStats(activeTrades);
     }
 
     private void refreshCacheFromLoadedTrades() {
