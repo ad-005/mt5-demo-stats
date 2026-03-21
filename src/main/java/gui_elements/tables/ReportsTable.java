@@ -17,7 +17,7 @@ public class ReportsTable extends JScrollPane {
 
     private void initComponents() {
         reportsTable = new JTable();
-        reportsTable.setFont(new Font("IBM Plex Mono", Font.PLAIN, 12));
+        reportsTable.setFont(Theme.Fonts.LABEL_DEFAULT);
         reportsTable.setShowVerticalLines(true);
         reportsTable.setShowHorizontalLines(true);
         setViewportView(reportsTable);

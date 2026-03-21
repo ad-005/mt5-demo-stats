@@ -41,7 +41,7 @@ public class AccountsTable extends JScrollPane {
         //======== this ========
 
         //---- accountsTable ----
-        accountsTable.setFont(new Font("IBM Plex Mono", Font.PLAIN, 12));
+        accountsTable.setFont(Theme.Fonts.LABEL_DEFAULT);
         accountsTable.setShowVerticalLines(true);
         accountsTable.setShowHorizontalLines(true);
         accountsTable.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));

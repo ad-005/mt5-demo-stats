@@ -27,7 +27,7 @@ public class TradeTable extends JScrollPane {
         //======== this ========
 
         //---- tradeTable ----
-        tradeTable.setFont(new Font("IBM Plex Mono", Font.PLAIN, 12));
+        tradeTable.setFont(Theme.Fonts.LABEL_DEFAULT);
         tradeTable.setShowVerticalLines(true);
         tradeTable.setShowHorizontalLines(true);
         setViewportView(tradeTable);

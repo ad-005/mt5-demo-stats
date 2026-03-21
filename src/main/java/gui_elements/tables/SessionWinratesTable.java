@@ -35,7 +35,7 @@ public class SessionWinratesTable extends JScrollPane {
         //======== this ========
 
         //---- sessionWinratesTable ----
-        sessionWinratesTable.setFont(new Font("IBM Plex Mono", Font.BOLD, 16));
+        sessionWinratesTable.setFont(Theme.Fonts.LABEL_XLARGE);
         sessionWinratesTable.setRowSelectionAllowed(false);
         sessionWinratesTable.setRowHeight(30);
         setViewportView(sessionWinratesTable);

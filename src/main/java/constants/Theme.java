@@ -2,6 +2,7 @@ package constants;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.text.DecimalFormat;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -22,7 +23,29 @@ public final class Theme {
     }
 
     // ===== FONT FAMILY =====
-    public static final String FONT_FAMILY = "IBM Plex Mono";
+    private static final String[] FONT_FAMILY_CANDIDATES = {
+        "SF Pro Text",
+        "SF Pro Display",
+        "San Francisco",
+        "Helvetica Neue",
+        "Segoe UI",
+        "Inter"
+    };
+    public static final String FONT_FAMILY = resolveFontFamily();
+
+    private static String resolveFontFamily() {
+        String[] availableFamilies = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+
+        for (String candidate : FONT_FAMILY_CANDIDATES) {
+            for (String available : availableFamilies) {
+                if (available.equalsIgnoreCase(candidate)) {
+                    return available;
+                }
+            }
+        }
+
+        return Font.SANS_SERIF;
+    }
 
     // ===== COLORS =====
     public static final class Colors {
