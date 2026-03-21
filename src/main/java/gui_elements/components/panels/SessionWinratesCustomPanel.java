@@ -18,7 +18,6 @@ import java.awt.*;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -110,10 +109,21 @@ public class SessionWinratesCustomPanel extends JPanel implements PropertyChange
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void propertyChange(PropertyChangeEvent event) {
         if ("sessionStats".equals(event.getPropertyName())) {
-            Map<TradingSession, Session> sessionMap = (HashMap<TradingSession, Session>) event.getNewValue();
+            Map<TradingSession, Session> sessionMap = Map.of();
+            Object newValue = event.getNewValue();
+            if (newValue instanceof Map<?, ?> rawMap) {
+                sessionMap = rawMap.entrySet().stream()
+                        .filter(entry -> entry.getKey() instanceof TradingSession)
+                        .filter(entry -> entry.getValue() instanceof Session)
+                        .collect(
+                                java.util.stream.Collectors.toMap(
+                                        entry -> (TradingSession) entry.getKey(),
+                                        entry -> (Session) entry.getValue()
+                                )
+                        );
+            }
 
             Session asianData = sessionMap.getOrDefault(TradingSession.ASIAN, new Session(0, 0, 0, 0.0));
             asianSessionLabel.setText(TradingSession.ASIAN.sessionName);
