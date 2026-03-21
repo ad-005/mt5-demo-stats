@@ -27,11 +27,11 @@ public class SelectionPanel extends JPanel {
         List<JToggleButton> selectionButtons = new ArrayList<>();
 
         JPanel selectionWrapper = new JPanel();
-        selectionWrapper.setLayout(new GridLayout(1, 3, 10, 0));
+        selectionWrapper.setLayout(new GridLayout(1, 4, 10, 0));
 
         selectionButtons.add(createToggleButton("Home", ViewType.HOME));
         selectionButtons.add(createToggleButton("Search", ViewType.SEARCH));
-        selectionButtons.add(createToggleButton("Stats", ViewType.STATS));
+        selectionButtons.add(createToggleButton("Reports", ViewType.REPORTS));
         selectionButtons.add(createToggleButton("Accounts", ViewType.ACCOUNTS));
 
         ButtonGroup selectionButtonGroup = groupToggleButtons(selectionButtons);

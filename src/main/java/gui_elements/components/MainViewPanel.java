@@ -15,9 +15,12 @@ import gui_elements.components.panels.SelectionPanel;
 import constants.ViewType;
 import models.AccountSelectionModel;
 import models.OverallStatsModel;
+import models.ReportDataModel;
 import models.TradeDataModel;
 import services.AccountFetchingService;
 import services.AccountManagementService;
+import services.ReportFetchingService;
+import services.ReportManagementService;
 
 import java.util.List;
 
@@ -33,7 +36,10 @@ public class MainViewPanel extends JPanel {
     private AccountSelectionModel sharedAccountSelectionModel;
     private AccountManagementService accountManagementService;
     private AccountFetchingService accountFetchingService;
+    private ReportManagementService reportManagementService;
     private OverallStatsController overallStatsController;
+    private ReportDataModel reportDataModel;
+    private ReportsPage reportsPage;
     private TradeFetcher tradeFetcher = new TradeFetcher();
 
     public MainViewPanel() {
@@ -41,6 +47,8 @@ public class MainViewPanel extends JPanel {
 
         initModels();
         initComponents();
+        reportsPage = new ReportsPage(reportDataModel, reportManagementService);
+        contentPanel.add(reportsPage, ViewType.REPORTS.name());
 
         accountsPage1.setAccountManagementService(accountManagementService);
 
@@ -96,10 +104,12 @@ public class MainViewPanel extends JPanel {
 
         sharedTradeDataModel = new TradeDataModel();
         sharedAccountSelectionModel = new AccountSelectionModel();
+        reportDataModel = new ReportDataModel();
         accountManagementService = new AccountManagementService(
                 accountFetchingService,
                 sharedAccountSelectionModel
         );
+        reportManagementService = new ReportManagementService(new ReportFetchingService());
 
         List<Account> accounts = accountManagementService.getAccounts();
         sharedAccountSelectionModel.setAccounts(accounts);
@@ -114,12 +124,32 @@ public class MainViewPanel extends JPanel {
         );
 
         homePage1.setStatsController(overallStatsController);
+        homePage1.setSaveAsReportListener(e -> saveCurrentStatsAsReport());
         overallStatsController.refreshStatistics();
     }
 
     private void bindAccountSelection() {
         homePage1.getAccountSelectionPanel().setModel(sharedAccountSelectionModel);
         searchPage1.getSearchFieldPanel().getAccountSelectionPanel().setModel(sharedAccountSelectionModel);
+    }
+
+    private void saveCurrentStatsAsReport() {
+        if (overallStatsController.getCurrentStatistics() == null) {
+            JOptionPane.showMessageDialog(this, "No statistics available to save yet.", "Save Report", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String accountLogin = null;
+        String accountName = null;
+        Account selected = sharedAccountSelectionModel.getSelectedAccount();
+        if (selected != null) {
+            accountLogin = selected.getLogin();
+            accountName = selected.getName();
+        }
+
+        reportManagementService.createReport(accountLogin, accountName, overallStatsController.getCurrentStatistics());
+        reportsPage.refreshReports();
+        JOptionPane.showMessageDialog(this, "Report saved successfully.", "Save Report", JOptionPane.INFORMATION_MESSAGE);
     }
 
     // Method for setting up the account selection model with the panels that use it
