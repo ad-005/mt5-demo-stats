@@ -1,6 +1,7 @@
 package models;
 
 import data_structures.TradeStatistics;
+import data_structures.OverallGrade;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -41,5 +42,10 @@ public class OverallStatsModel {
         pcs.firePropertyChange("riskRewardRatio", null, stats.riskRewardRatio());
         pcs.firePropertyChange("dailyWinRates", null, stats.dailyWinRates());
         pcs.firePropertyChange("symbolBreakdown", null, stats.symbolBreakdown());
+    }
+
+    public void updateOverallGrade(OverallGrade overallGrade) {
+        pcs.firePropertyChange("overallScore", null, overallGrade.score());
+        pcs.firePropertyChange("overallGrade", null, overallGrade.letter());
     }
 }

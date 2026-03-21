@@ -68,6 +68,13 @@ public final class Theme {
         public static final Color PROGRESS_POSITIVE = SUCCESS;           // foreground for positive
         public static final Color PROGRESS_NEGATIVE = new Color(0xff3333); // background for negative
 
+        // Overall grade semantic colors
+        public static final Color GRADE_A = SUCCESS;
+        public static final Color GRADE_B = new Color(0x2E7D32);
+        public static final Color GRADE_C = new Color(0xF9A825);
+        public static final Color GRADE_D = new Color(0xEF6C00);
+        public static final Color GRADE_F = DANGER;
+
         // Border colors
         public static final Color BORDER_DEFAULT = new Color(0xD2D8E0);
         public static final Color TABLE_HEADER_SEPARATOR = new Color(0x8c8c8c);

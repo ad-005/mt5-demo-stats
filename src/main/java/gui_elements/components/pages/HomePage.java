@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
  * @author root
  */
 public class HomePage extends JPanel {
+    private OverallGradePanel overallGradePanel1;
     private PerformanceOverviewPanel performanceOverviewPanel1;
     private DailyWinratesPanel dailyWinratesPanel1;
     private TopSymbolsPanel topSymbolsPanel1;
@@ -86,6 +87,7 @@ public class HomePage extends JPanel {
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 
     private void buildTieredLayout() {
+        overallGradePanel1 = new OverallGradePanel();
         performanceOverviewPanel1 = new PerformanceOverviewPanel();
         dailyWinratesPanel1 = new DailyWinratesPanel();
         topSymbolsPanel1 = new TopSymbolsPanel();
@@ -99,6 +101,8 @@ public class HomePage extends JPanel {
         contentContainer.setLayout(new BoxLayout(contentContainer, BoxLayout.Y_AXIS));
         contentContainer.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
         contentContainer.setOpaque(false);
+        contentContainer.add(overallGradePanel1);
+        contentContainer.add(Box.createVerticalStrut(10));
         contentContainer.add(accountSelectionPanel1);
         contentContainer.add(Box.createVerticalStrut(10));
         saveAsReportButton = new JButton("Save as Report");
@@ -128,6 +132,7 @@ public class HomePage extends JPanel {
     }
 
     public void setStatsController(OverallStatsController controller) {
+        overallGradePanel1.setController(controller);
         winratePanel1.setController(controller);
         tradingBiasPanel1.setController(controller);
         sessionWinratesCustomPanel1.setController(controller);

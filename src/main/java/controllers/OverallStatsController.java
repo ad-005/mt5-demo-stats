@@ -2,11 +2,13 @@ package controllers;
 
 import data_structures.Account;
 import data_structures.Trade;
+import data_structures.OverallGrade;
 import models.AccountSelectionModel;
 import models.OverallStatsModel;
 import models.TradeDataModel;
 import data_structures.TradeStatistics;
 import services.StatsCacheService;
+import services.OverallGradeService;
 import services.TradeStatisticsService;
 
 import java.beans.PropertyChangeEvent;
@@ -20,6 +22,7 @@ public class OverallStatsController implements PropertyChangeListener {
     private final OverallStatsModel statsModel;
     private final TradeDataModel tradeDataModel;
     private final TradeStatisticsService statisticsService;
+    private final OverallGradeService overallGradeService;
     private final StatsCacheService statsCacheService;
     private final AccountSelectionModel accountSelectionModel;
     private TradeStatistics currentStatistics;
@@ -28,6 +31,7 @@ public class OverallStatsController implements PropertyChangeListener {
         this.statsModel = statsModel;
         this.tradeDataModel = dataModel;
         this.statisticsService = new TradeStatisticsService();
+        this.overallGradeService = new OverallGradeService();
         this.statsCacheService = new StatsCacheService();
         this.accountSelectionModel = accountSelectionModel;
         dataModel.addPropertyChangeListener(TradeDataModel.TRADES_PROPERTY, this);
@@ -49,6 +53,8 @@ public class OverallStatsController implements PropertyChangeListener {
                 : getSelectedAccountStats();
         currentStatistics = stats;
         statsModel.updateFrom(stats);
+        OverallGrade overallGrade = overallGradeService.calculateGrade(stats);
+        statsModel.updateOverallGrade(overallGrade);
     }
 
     private TradeStatistics getSelectedAccountStats() {
