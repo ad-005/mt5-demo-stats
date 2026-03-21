@@ -241,7 +241,6 @@ public class TradeStatisticsService {
         for (String day : DAY_ORDER) {
             DayAccumulator acc = dayAccumulators.get(day);
             if (acc == null || acc.totalTrades == 0) {
-                dailyWinRates.put(day, 0.0);
                 continue;
             }
             dailyWinRates.put(day, round2(acc.wins * 100.0 / acc.totalTrades));
@@ -294,13 +293,18 @@ public class TradeStatisticsService {
         }
 
         for (Trade trade : trades) {
-            if (trade.getOpenTime() == null || trade.getBrokerTimeZone() == null) {
+            if (trade.getOpenTime() == null) {
                 continue;
             }
-            DayOfWeek dayOfWeek = trade.getOpenTime()
-                    .atZone(trade.getBrokerTimeZone())
-                    .withZoneSameInstant(ZoneId.of("UTC"))
-                    .getDayOfWeek();
+            DayOfWeek dayOfWeek;
+            if (trade.getBrokerTimeZone() != null) {
+                dayOfWeek = trade.getOpenTime()
+                        .atZone(trade.getBrokerTimeZone())
+                        .withZoneSameInstant(ZoneId.of("UTC"))
+                        .getDayOfWeek();
+            } else {
+                dayOfWeek = trade.getOpenTime().getDayOfWeek();
+            }
             String day = dayOfWeek != null ? toDayLabel(dayOfWeek) : null;
             if (day == null) {
                 continue;
@@ -312,7 +316,6 @@ public class TradeStatisticsService {
         for (String day : DAY_ORDER) {
             List<Double> pnls = pnlsByDay.get(day);
             if (pnls == null || pnls.isEmpty()) {
-                result.put(day, 0.0);
                 continue;
             }
             int wins = (int) pnls.stream().filter(p -> p > 0).count();
@@ -435,17 +438,12 @@ public class TradeStatisticsService {
             emptySessions.put(session, new Session(0, 0, 0, 0.0));
         }
 
-        Map<String, Double> emptyDays = new LinkedHashMap<>();
-        for (String day : DAY_ORDER) {
-            emptyDays.put(day, 0.0);
-        }
-
         return new TradeStatistics(
                 0, 0, 0, 0.0, 0, 0, 0, 0.0, 0.0,
                 emptySessions,
                 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
                 0, 0, 0.0,
-                emptyDays,
+                Map.of(),
                 Map.of()
         );
     }
