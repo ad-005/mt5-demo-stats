@@ -28,17 +28,25 @@ public final class Theme {
     public static final class Colors {
         private Colors() {}
 
+        // Base surfaces for light, macOS-like appearance
+        public static final Color APP_BACKGROUND = new Color(0xF5F6F8);
+        public static final Color SURFACE_PRIMARY = Color.WHITE;
+        public static final Color SURFACE_SECONDARY = new Color(0xF0F2F5);
+        public static final Color TEXT_PRIMARY = new Color(0x1F2937);
+        public static final Color TEXT_SECONDARY = new Color(0x6B7280);
+        public static final Color ACCENT = new Color(0x0A84FF);
+
         // Semantic colors for profit/loss indicators
         public static final Color SUCCESS = new Color(86, 179, 46);      // #56b32e - profit green
         public static final Color DANGER = new Color(204, 58, 35);       // #cc3a23 - loss red
-        public static final Color NEUTRAL = Color.BLACK;
+        public static final Color NEUTRAL = TEXT_PRIMARY;
 
         // Progress bar colors (winrate/bias bars)
         public static final Color PROGRESS_POSITIVE = SUCCESS;           // foreground for positive
         public static final Color PROGRESS_NEGATIVE = new Color(0xff3333); // background for negative
 
         // Border colors
-        public static final Color BORDER_DEFAULT = Color.BLACK;
+        public static final Color BORDER_DEFAULT = new Color(0xD2D8E0);
         public static final Color TABLE_HEADER_SEPARATOR = new Color(0x8c8c8c);
     }
 
@@ -77,7 +85,7 @@ public final class Theme {
         private Borders() {}
 
         // Standard panel border
-        public static final int DEFAULT_THICKNESS = 2;
+        public static final int DEFAULT_THICKNESS = 1;
         public static final boolean DEFAULT_ROUNDED = true;
 
         /**

@@ -5,6 +5,7 @@
 package gui_elements.components.panels;
 
 import constants.TradingSession;
+import constants.Theme;
 import gui_elements.renderers.SessionComboBoxRenderer;
 import models.SessionSelectionModel;
 
@@ -35,15 +36,15 @@ public class SessionSelectionPanel extends JPanel {
 
         //---- purposeLabel ----
         purposeLabel.setText("Choose a session to display information for");
-        purposeLabel.setFont(new Font("IBM Plex Mono", Font.BOLD, 12));
+        purposeLabel.setFont(Theme.Fonts.LABEL_BOLD);
         purposeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         purposeLabel.setVerticalAlignment(SwingConstants.BOTTOM);
         purposeLabel.setBorder(new EmptyBorder(0, 0, 10, 0));
-        purposeLabel.setBackground(Color.white);
+        purposeLabel.setBackground(Theme.Colors.SURFACE_PRIMARY);
         add(purposeLabel);
 
         //---- sessionComboBox ----
-        sessionComboBox.setFont(new Font("IBM Plex Mono", Font.BOLD, 14));
+        sessionComboBox.setFont(Theme.Fonts.LABEL_LARGE);
         add(sessionComboBox);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }

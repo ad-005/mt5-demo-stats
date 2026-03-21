@@ -6,7 +6,7 @@ package gui_elements.tables;
 
 import java.awt.*;
 
-import constants.UIConstants;
+import constants.Theme;
 import table_models.AccountsTableModel;
 
 import javax.swing.*;
@@ -29,7 +29,7 @@ public class AccountsTable extends JScrollPane {
 
         accountsTable.getTableHeader().setReorderingAllowed(false);
         accountsTable.getTableHeader().setResizingAllowed(false);
-        accountsTable.getTableHeader().setFont(UIConstants.TABLE_HEADER_FONT);
+        accountsTable.getTableHeader().setFont(Theme.Fonts.TABLE_HEADER);
 
     }
 

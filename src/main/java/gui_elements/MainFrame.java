@@ -1,5 +1,6 @@
 package gui_elements;
 
+import constants.Theme;
 import gui_elements.components.MainViewPanel;
 
 import javax.swing.JFrame;
@@ -15,7 +16,7 @@ public class MainFrame extends JFrame {
         setSize(1200, 600);
         setLayout(new BorderLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setBackground(Color.WHITE);
+        setBackground(Theme.Colors.APP_BACKGROUND);
         setLocationRelativeTo(null);
 
         initGUI();

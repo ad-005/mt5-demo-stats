@@ -4,7 +4,7 @@
 
 package gui_elements.tables;
 
-import constants.UIConstants;
+import constants.Theme;
 import gui_elements.renderers.ProgressCellRenderer;
 import table_models.SessionWinratesTableModel;
 
@@ -23,7 +23,7 @@ public class SessionWinratesTable extends JScrollPane {
 
         sessionWinratesTable.getTableHeader().setReorderingAllowed(false);
         sessionWinratesTable.getTableHeader().setResizingAllowed(false);
-        sessionWinratesTable.getTableHeader().setFont(UIConstants.TABLE_HEADER_FONT);
+        sessionWinratesTable.getTableHeader().setFont(Theme.Fonts.TABLE_HEADER);
         sessionWinratesTable.getTableHeader().setOpaque(false);
     }
 

@@ -5,6 +5,7 @@
 package gui_elements.components.panels;
 
 import constants.AccountType;
+import constants.Theme;
 import data_structures.Account;
 
 import java.awt.*;
@@ -38,16 +39,16 @@ public class LoginPanel extends JPanel {
 
         //---- addAccountLabel ----
         addAccountLabel.setText("Add Account");
-        addAccountLabel.setFont(new Font("IBM Plex Mono", Font.BOLD, 24));
+        addAccountLabel.setFont(Theme.Fonts.LABEL_HEADING);
         addAccountLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        addAccountLabel.setBackground(new Color(0x999999));
+        addAccountLabel.setForeground(Theme.Colors.TEXT_PRIMARY);
         addAccountLabel.setBorder(null);
         add(addAccountLabel);
 
         //---- accountNameField ----
         accountNameField.setHorizontalAlignment(SwingConstants.CENTER);
         accountNameField.setText("Name");
-        accountNameField.setFont(new Font("IBM Plex Mono", Font.BOLD, 18));
+        accountNameField.setFont(Theme.Fonts.LABEL_HEADING);
         accountNameField.setPreferredSize(null);
         accountNameField.setBorder(null);
         add(accountNameField);
@@ -55,7 +56,7 @@ public class LoginPanel extends JPanel {
         //---- accountTypeField ----
         accountTypeField.setHorizontalAlignment(SwingConstants.CENTER);
         accountTypeField.setText("Type");
-        accountTypeField.setFont(new Font("IBM Plex Mono", Font.BOLD, 18));
+        accountTypeField.setFont(Theme.Fonts.LABEL_HEADING);
         accountTypeField.setPreferredSize(null);
         accountTypeField.setFocusLostBehavior(JFormattedTextField.PERSIST);
         accountTypeField.setBorder(null);
@@ -64,7 +65,7 @@ public class LoginPanel extends JPanel {
         //---- accountServerField ----
         accountServerField.setHorizontalAlignment(SwingConstants.CENTER);
         accountServerField.setText("Server");
-        accountServerField.setFont(new Font("IBM Plex Mono", Font.BOLD, 18));
+        accountServerField.setFont(Theme.Fonts.LABEL_HEADING);
         accountServerField.setPreferredSize(null);
         accountServerField.setFocusLostBehavior(JFormattedTextField.PERSIST);
         accountServerField.setBorder(null);
@@ -73,7 +74,7 @@ public class LoginPanel extends JPanel {
         //---- accountLoginField ----
         accountLoginField.setHorizontalAlignment(SwingConstants.CENTER);
         accountLoginField.setText("Login");
-        accountLoginField.setFont(new Font("IBM Plex Mono", Font.BOLD, 18));
+        accountLoginField.setFont(Theme.Fonts.LABEL_HEADING);
         accountLoginField.setPreferredSize(null);
         accountLoginField.setFocusLostBehavior(JFormattedTextField.PERSIST);
         accountLoginField.setBorder(null);
@@ -82,7 +83,7 @@ public class LoginPanel extends JPanel {
         //---- accountPasswordField ----
         accountPasswordField.setHorizontalAlignment(SwingConstants.CENTER);
         accountPasswordField.setText("Password");
-        accountPasswordField.setFont(new Font("IBM Plex Mono", Font.BOLD, 18));
+        accountPasswordField.setFont(Theme.Fonts.LABEL_HEADING);
         accountPasswordField.setPreferredSize(null);
         accountPasswordField.setFocusLostBehavior(JFormattedTextField.PERSIST);
         accountPasswordField.setBorder(null);
@@ -91,7 +92,7 @@ public class LoginPanel extends JPanel {
         //---- accountInvestorField ----
         accountInvestorField.setHorizontalAlignment(SwingConstants.CENTER);
         accountInvestorField.setText("Investor");
-        accountInvestorField.setFont(new Font("IBM Plex Mono", Font.BOLD, 18));
+        accountInvestorField.setFont(Theme.Fonts.LABEL_HEADING);
         accountInvestorField.setPreferredSize(null);
         accountInvestorField.setFocusLostBehavior(JFormattedTextField.PERSIST);
         accountInvestorField.setBorder(null);
@@ -99,14 +100,14 @@ public class LoginPanel extends JPanel {
 
         //---- addAccountButton ----
         addAccountButton.setText("Add");
-        addAccountButton.setFont(new Font("IBM Plex Mono", Font.BOLD, 24));
-        addAccountButton.setBackground(new Color(0xcccccc));
+        addAccountButton.setFont(Theme.Fonts.LABEL_HEADING);
+        addAccountButton.setBackground(Theme.Colors.SURFACE_SECONDARY);
         addAccountButton.setBorder(new SoftBevelBorder(SoftBevelBorder.LOWERED));
         add(addAccountButton);
 
         //---- removeAccountButton ----
         removeAccountButton.setText("Remove an Account");
-        removeAccountButton.setFont(new Font("IBM Plex Mono", Font.BOLD, 24));
+        removeAccountButton.setFont(Theme.Fonts.LABEL_HEADING);
         add(removeAccountButton);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }

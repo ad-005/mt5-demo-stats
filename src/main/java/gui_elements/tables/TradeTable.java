@@ -5,7 +5,7 @@
 package gui_elements.tables;
 
 import java.awt.*;
-import constants.UIConstants;
+import constants.Theme;
 import gui_elements.renderers.ProfitCellRenderer;
 import table_models.TradeTableModel;
 
@@ -50,6 +50,6 @@ public class TradeTable extends JScrollPane {
 
         tradeTable.getTableHeader().setReorderingAllowed(false);
         tradeTable.getTableHeader().setResizingAllowed(true);
-        tradeTable.getTableHeader().setFont(UIConstants.TABLE_HEADER_FONT);
+        tradeTable.getTableHeader().setFont(Theme.Fonts.TABLE_HEADER);
     }
 }

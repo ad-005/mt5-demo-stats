@@ -1,6 +1,6 @@
 package gui_elements.tables;
 
-import constants.UIConstants;
+import constants.Theme;
 import gui_elements.renderers.ProfitCellRenderer;
 import table_models.ReportsTableModel;
 
@@ -33,6 +33,6 @@ public class ReportsTable extends JScrollPane {
         reportsTable.getColumnModel().getColumn(2).setCellRenderer(new ProfitCellRenderer());
         reportsTable.getTableHeader().setReorderingAllowed(false);
         reportsTable.getTableHeader().setResizingAllowed(true);
-        reportsTable.getTableHeader().setFont(UIConstants.TABLE_HEADER_FONT);
+        reportsTable.getTableHeader().setFont(Theme.Fonts.TABLE_HEADER);
     }
 }

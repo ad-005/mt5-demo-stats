@@ -4,6 +4,7 @@
 
 package gui_elements.components.pages;
 
+import constants.Theme;
 import javax.swing.*;
 
 import controllers.OverallStatsController;
@@ -97,9 +98,11 @@ public class HomePage extends JPanel {
         contentContainer = new JPanel();
         contentContainer.setLayout(new BoxLayout(contentContainer, BoxLayout.Y_AXIS));
         contentContainer.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        contentContainer.setOpaque(false);
         contentContainer.add(accountSelectionPanel1);
         contentContainer.add(Box.createVerticalStrut(10));
         saveAsReportButton = new JButton("Save as Report");
+        saveAsReportButton.setFont(Theme.Fonts.BUTTON_DEFAULT);
         saveAsReportButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         contentContainer.add(saveAsReportButton);
         contentContainer.add(Box.createVerticalStrut(10));

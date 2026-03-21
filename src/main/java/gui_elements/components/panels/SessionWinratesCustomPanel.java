@@ -1,12 +1,12 @@
 package gui_elements.components.panels;
 
 import constants.TradingSession;
+import constants.Theme;
 import controllers.OverallStatsController;
 import data.MockDataFactory;
 import data_structures.Session;
 import data_structures.Trade;
 import gui_elements.components.elements.WinrateProgressBar;
-import constants.UIConstants;
 import interfaces.ModelObserver;
 
 import javax.swing.*;
@@ -43,11 +43,11 @@ public class SessionWinratesCustomPanel extends JPanel implements PropertyChange
     public SessionWinratesCustomPanel() {
         setLayout(new GridLayout(4, 3, 10, 20));
         setOpaque(false);
-        setBorder(new CompoundBorder(new TitledBorder(new LineBorder(Color.BLACK,
-                2, true),
+        setBorder(new CompoundBorder(new TitledBorder(new LineBorder(Theme.Colors.BORDER_DEFAULT,
+                Theme.Borders.DEFAULT_THICKNESS, Theme.Borders.DEFAULT_ROUNDED),
                 "Session Winrates",
                 TitledBorder.CENTER,
-                TitledBorder.TOP, UIConstants.DEFAULT_BUTTON_FONT),
+                TitledBorder.TOP, Theme.Fonts.PANEL_TITLE),
                 new EmptyBorder(10, 10, 10, 10)));
 
         initElements();
@@ -81,15 +81,15 @@ public class SessionWinratesCustomPanel extends JPanel implements PropertyChange
         londonSessionBar = new WinrateProgressBar();
         newyorkSessionBar = new WinrateProgressBar();
 
-        asianSessionLabel.setFont(UIConstants.SESSION_WINRATE_LABEL_FONT);
-        sydneySessionLabel.setFont(UIConstants.SESSION_WINRATE_LABEL_FONT);
-        londonSessionLabel.setFont(UIConstants.SESSION_WINRATE_LABEL_FONT);
-        newyorkSessionLabel.setFont(UIConstants.SESSION_WINRATE_LABEL_FONT);
+        asianSessionLabel.setFont(Theme.Fonts.LABEL_HEADING);
+        sydneySessionLabel.setFont(Theme.Fonts.LABEL_HEADING);
+        londonSessionLabel.setFont(Theme.Fonts.LABEL_HEADING);
+        newyorkSessionLabel.setFont(Theme.Fonts.LABEL_HEADING);
 
-        asianWinrateLabel.setFont(UIConstants.SESSION_WINRATE_LABEL_FONT);
-        sydneyWinrateLabel.setFont(UIConstants.SESSION_WINRATE_LABEL_FONT);
-        londonWinrateLabel.setFont(UIConstants.SESSION_WINRATE_LABEL_FONT);
-        newyorkWinrateLabel.setFont(UIConstants.SESSION_WINRATE_LABEL_FONT);
+        asianWinrateLabel.setFont(Theme.Fonts.LABEL_HEADING);
+        sydneyWinrateLabel.setFont(Theme.Fonts.LABEL_HEADING);
+        londonWinrateLabel.setFont(Theme.Fonts.LABEL_HEADING);
+        newyorkWinrateLabel.setFont(Theme.Fonts.LABEL_HEADING);
 
         this.add(asianSessionLabel);
         this.add(asianSessionBar);

@@ -1,7 +1,7 @@
 package gui_elements.components.panels;
 
 import com.formdev.flatlaf.FlatClientProperties;
-import constants.UIConstants;
+import constants.Theme;
 import constants.ViewType;
 
 import java.util.List;
@@ -60,7 +60,7 @@ public class SelectionPanel extends JPanel {
     private JToggleButton createToggleButton(String buttonText, ViewType viewType) {
         JToggleButton button = new JToggleButton(buttonText);
 
-        button.setFont(UIConstants.DEFAULT_BUTTON_FONT);
+        button.setFont(Theme.Fonts.BUTTON_DEFAULT);
         button.putClientProperty(FlatClientProperties.STYLE_CLASS, "selectionButton");
         button.putClientProperty("viewType", viewType);
 

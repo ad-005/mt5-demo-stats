@@ -4,6 +4,7 @@
 
 package gui_elements.components.panels;
 
+import constants.Theme;
 import java.beans.PropertyChangeEvent;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -66,18 +67,18 @@ public class SearchFieldPanel extends JPanel implements ModelObserver {
 
         //---- label1 ----
         label1.setText("Search by account");
-        label1.setFont(new Font("IBM Plex Mono", Font.BOLD, 16));
+        label1.setFont(Theme.Fonts.LABEL_XLARGE);
         add(label1, "cell 0 3,alignx center,growx 0");
 
         //---- searchByDateButton ----
         searchByDateButton.setText("Search");
-        searchByDateButton.setFont(new Font("IBM Plex Mono", Font.BOLD, 14));
+        searchByDateButton.setFont(Theme.Fonts.BUTTON_DEFAULT);
         searchByDateButton.setAutoscrolls(true);
         add(searchByDateButton, "cell 0 4,alignx center,growx 0,wmin 100");
 
         //---- startDateTextField ----
-        startDateTextField.setFont(new Font("IBM Plex Mono", Font.PLAIN, 14));
-        startDateTextField.setBackground(Color.white);
+        startDateTextField.setFont(Theme.Fonts.LABEL_LARGE);
+        startDateTextField.setBackground(Theme.Colors.SURFACE_PRIMARY);
         startDateTextField.setText("DD-MM-YYYY");
         startDateTextField.setHorizontalAlignment(SwingConstants.CENTER);
         startDateTextField.setToolTipText("Format: DD-MM-YYYY");
@@ -85,31 +86,31 @@ public class SearchFieldPanel extends JPanel implements ModelObserver {
 
         //---- endDateTextField ----
         endDateTextField.setText("DD-MM-YYYY");
-        endDateTextField.setFont(new Font("IBM Plex Mono", Font.PLAIN, 14));
+        endDateTextField.setFont(Theme.Fonts.LABEL_LARGE);
         endDateTextField.setHorizontalAlignment(SwingConstants.CENTER);
         endDateTextField.setToolTipText("Format: DD-MM-YYYY");
         add(endDateTextField, "cell 0 5,dock center,wmin 220");
 
         //---- startDateLabel ----
         startDateLabel.setText("Start date");
-        startDateLabel.setFont(new Font("IBM Plex Mono", Font.BOLD, 14));
+        startDateLabel.setFont(Theme.Fonts.LABEL_LARGE);
         startDateLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(startDateLabel, "pad 0,cell 0 6,dock center");
 
         //---- endDateLabel ----
         endDateLabel.setText("End date");
-        endDateLabel.setFont(new Font("IBM Plex Mono", Font.BOLD, 14));
+        endDateLabel.setFont(Theme.Fonts.LABEL_LARGE);
         endDateLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(endDateLabel, "pad 0,cell 0 6,dock center");
 
         //---- searchByDateLabel ----
         searchByDateLabel.setText("Search by date");
-        searchByDateLabel.setFont(new Font("IBM Plex Mono", Font.BOLD, 16));
+        searchByDateLabel.setFont(Theme.Fonts.LABEL_XLARGE);
         add(searchByDateLabel, "cell 0 7,alignx center,growx 0");
 
         //---- tradesShownLabel ----
         tradesShownLabel.setText("Showing n out of n trades");
-        tradesShownLabel.setFont(new Font("IBM Plex Mono", Font.PLAIN, 12));
+        tradesShownLabel.setFont(Theme.Fonts.LABEL_DEFAULT);
         add(tradesShownLabel, "cell 0 8");
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }

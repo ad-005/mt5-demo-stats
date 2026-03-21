@@ -1,6 +1,6 @@
 package gui_elements.renderers;
 
-import constants.UIConstants;
+import constants.Theme;
 
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.JTable;
@@ -15,7 +15,7 @@ public class ProfitCellRenderer extends DefaultTableCellRenderer {
 
         if (value instanceof Double) {
             double profit = (Double) value;
-            String formattedProfit = UIConstants.PROFIT_DECIMAL_FORMAT.format(profit);
+            String formattedProfit = Theme.Formatting.PROFIT.format(profit);
 
             Component cell = super.getTableCellRendererComponent(table, formattedProfit, isSelected, hasFocus, row, column);
 
@@ -23,11 +23,11 @@ public class ProfitCellRenderer extends DefaultTableCellRenderer {
             cell.setFont(boldFont);
 
             if (profit < 0) {
-                cell.setForeground(UIConstants.LOSS_RED_COLOR);
+                cell.setForeground(Theme.Colors.DANGER);
             } else if (profit > 0) {
-                cell.setForeground(UIConstants.PROFIT_GREEN_COLOR);
+                cell.setForeground(Theme.Colors.SUCCESS);
             } else {
-                cell.setForeground(Color.BLACK);
+                cell.setForeground(Theme.Colors.NEUTRAL);
             }
 
             return cell;

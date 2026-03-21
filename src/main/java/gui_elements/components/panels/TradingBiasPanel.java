@@ -4,6 +4,7 @@
 
 package gui_elements.components.panels;
 
+import constants.Theme;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -47,8 +48,8 @@ public class TradingBiasPanel extends JPanel implements PropertyChangeListener {
         bearishTradesPctLabel = new JLabel();
 
         //======== this ========
-        setBorder(new TitledBorder(new LineBorder(Color.black, 2, true), "Trading Bias", TitledBorder.CENTER, TitledBorder.TOP,
-            new Font("IBM Plex Mono", Font.BOLD, 16)));
+        setBorder(new TitledBorder(Theme.Borders.panelBorder(), "Trading Bias", TitledBorder.CENTER, TitledBorder.TOP,
+            Theme.Fonts.PANEL_TITLE));
         setLayout(new MigLayout(
             "insets null null 15 null,hidemode 3,alignx center",
             // columns
@@ -87,44 +88,44 @@ public class TradingBiasPanel extends JPanel implements PropertyChangeListener {
 
         //---- bearishLabel ----
         bearishLabel.setText("Bullish");
-        bearishLabel.setFont(new Font("IBM Plex Mono", Font.BOLD, 16));
+        bearishLabel.setFont(Theme.Fonts.LABEL_XLARGE);
         bearishLabel.setBorder(new EmptyBorder(5, 5, 5, 5));
         add(bearishLabel, "cell 1 2,alignx center,growx 0");
 
         //---- neutralLabel ----
         neutralLabel.setText("Neutral");
-        neutralLabel.setFont(new Font("IBM Plex Mono", Font.BOLD, 16));
+        neutralLabel.setFont(Theme.Fonts.LABEL_XLARGE);
         add(neutralLabel, "cell 12 2,alignx center,growx 0");
 
         //---- bullishLabel ----
         bullishLabel.setText("Bearish");
-        bullishLabel.setFont(new Font("IBM Plex Mono", Font.BOLD, 16));
+        bullishLabel.setFont(Theme.Fonts.LABEL_XLARGE);
         add(bullishLabel, "cell 23 2,align center center,grow 0 0");
 
         //---- progressBar1 ----
         progressBar1.setValue(50);
-        progressBar1.setBackground(new Color(0xff3333));
-        progressBar1.setForeground(new Color(0x56b32e));
+        progressBar1.setBackground(Theme.Colors.PROGRESS_NEGATIVE);
+        progressBar1.setForeground(Theme.Colors.PROGRESS_POSITIVE);
         add(progressBar1, "cell 1 4 23 1");
 
         //---- bullishTradesNumberLabel ----
         bullishTradesNumberLabel.setText("55");
-        bullishTradesNumberLabel.setFont(new Font("IBM Plex Mono", Font.BOLD, 14));
+        bullishTradesNumberLabel.setFont(Theme.Fonts.LABEL_LARGE);
         add(bullishTradesNumberLabel, "cell 1 5,alignx center,growx 0");
 
         //---- bullishTradesPctLabel ----
         bullishTradesPctLabel.setText("(55 %)");
-        bullishTradesPctLabel.setFont(new Font("IBM Plex Mono", Font.BOLD, 14));
+        bullishTradesPctLabel.setFont(Theme.Fonts.LABEL_LARGE);
         add(bullishTradesPctLabel, "cell 1 5");
 
         //---- bearishTradesNumberLabel ----
         bearishTradesNumberLabel.setText("60");
-        bearishTradesNumberLabel.setFont(new Font("IBM Plex Mono", Font.BOLD, 14));
+        bearishTradesNumberLabel.setFont(Theme.Fonts.LABEL_LARGE);
         add(bearishTradesNumberLabel, "cell 23 5,alignx center,growx 0");
 
         //---- bearishTradesPctLabel ----
         bearishTradesPctLabel.setText("(60 %)");
-        bearishTradesPctLabel.setFont(new Font("IBM Plex Mono", Font.BOLD, 14));
+        bearishTradesPctLabel.setFont(Theme.Fonts.LABEL_LARGE);
         add(bearishTradesPctLabel, "cell 23 5");
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }

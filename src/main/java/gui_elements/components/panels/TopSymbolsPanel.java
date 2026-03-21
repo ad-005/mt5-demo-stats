@@ -17,6 +17,8 @@ import java.util.Map;
 
 public class TopSymbolsPanel extends JPanel implements PropertyChangeListener {
     private final DefaultTableModel tableModel;
+    private final JTable table;
+    private final JScrollPane tableScrollPane;
 
     public TopSymbolsPanel() {
         setLayout(new BorderLayout());
@@ -30,11 +32,16 @@ public class TopSymbolsPanel extends JPanel implements PropertyChangeListener {
             }
         };
 
-        JTable table = new JTable(tableModel);
+        table = new JTable(tableModel);
         table.getTableHeader().setFont(Theme.Fonts.TABLE_HEADER);
         table.setFont(Theme.Fonts.TABLE_DATA_LARGE);
         table.setRowHeight(28);
-        add(new JScrollPane(table), BorderLayout.CENTER);
+        table.setFillsViewportHeight(false);
+
+        tableScrollPane = new JScrollPane(table);
+        add(tableScrollPane, BorderLayout.CENTER);
+
+        updateTableSizing();
     }
 
     public void setController(OverallStatsController controller) {
@@ -70,5 +77,27 @@ public class TopSymbolsPanel extends JPanel implements PropertyChangeListener {
                     String.format("%.2f", row.getValue().pnl())
             });
         }
+
+        updateTableSizing();
+    }
+
+    private void updateTableSizing() {
+        int rowCount = tableModel.getRowCount();
+        int headerHeight = table.getTableHeader().getPreferredSize().height;
+        int bodyHeight = rowCount * table.getRowHeight();
+        int tableHeight = headerHeight + bodyHeight;
+
+        Dimension currentScrollPref = tableScrollPane.getPreferredSize();
+        table.setPreferredScrollableViewportSize(new Dimension(currentScrollPref.width, tableHeight));
+
+        Insets scrollInsets = tableScrollPane.getInsets();
+        int scrollHeight = tableHeight + scrollInsets.top + scrollInsets.bottom;
+        tableScrollPane.setPreferredSize(new Dimension(currentScrollPref.width, scrollHeight));
+        tableScrollPane.setMaximumSize(new Dimension(Integer.MAX_VALUE, scrollHeight));
+
+        Dimension panelPref = getPreferredSize();
+        setMaximumSize(new Dimension(Integer.MAX_VALUE, panelPref.height));
+        revalidate();
+        repaint();
     }
 }

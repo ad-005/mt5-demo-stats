@@ -7,6 +7,7 @@ package gui_elements.components.panels;
 import data_structures.Account;
 import gui_elements.renderers.AccountComboBoxRenderer;
 import models.AccountSelectionModel;
+import constants.Theme;
 
 import java.awt.*;
 import javax.swing.*;
@@ -35,15 +36,15 @@ public class AccountSelectionPanel extends JPanel {
 
         //---- purposeLabel ----
         purposeLabel.setText("Choose an account to display information for");
-        purposeLabel.setFont(new Font("IBM Plex Mono", Font.BOLD, 12));
+        purposeLabel.setFont(Theme.Fonts.LABEL_BOLD);
         purposeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         purposeLabel.setVerticalAlignment(SwingConstants.BOTTOM);
         purposeLabel.setBorder(new EmptyBorder(0, 0, 10, 0));
-        purposeLabel.setBackground(Color.white);
+        purposeLabel.setBackground(Theme.Colors.SURFACE_PRIMARY);
         add(purposeLabel);
 
         //---- accountComboBox ----
-        accountComboBox.setFont(new Font("IBM Plex Mono", Font.BOLD, 14));
+        accountComboBox.setFont(Theme.Fonts.LABEL_LARGE);
         add(accountComboBox);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
