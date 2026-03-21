@@ -14,27 +14,21 @@ import java.util.List;
 import java.util.Map;
 
 public class DailyWinratesPanel extends JPanel implements PropertyChangeListener {
-    private final Map<String, WinrateProgressBar> bars = new LinkedHashMap<>();
-    private final Map<String, JLabel> labels = new LinkedHashMap<>();
+    private static final List<String> DAY_ORDER = List.of(
+            "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+    );
+    private final JPanel rowsPanel;
 
     public DailyWinratesPanel() {
-        setLayout(new GridLayout(0, 3, 10, 8));
+        setLayout(new BorderLayout());
         setBorder(new TitledBorder(Theme.Borders.panelBorder(), "Daily Winrates", TitledBorder.CENTER, TitledBorder.TOP, Theme.Fonts.PANEL_TITLE));
         setOpaque(false);
 
-        List<String> days = List.of("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
-        for (String day : days) {
-            JLabel dayLabel = new JLabel(day);
-            dayLabel.setFont(Theme.Fonts.LABEL_BOLD);
-            WinrateProgressBar bar = new WinrateProgressBar(0);
-            JLabel valueLabel = new JLabel("0.00 %", SwingConstants.RIGHT);
-            valueLabel.setFont(Theme.Fonts.LABEL_BOLD);
-            add(dayLabel);
-            add(bar);
-            add(valueLabel);
-            bars.put(day, bar);
-            labels.put(day, valueLabel);
-        }
+        rowsPanel = new JPanel(new GridLayout(0, 3, 10, 8));
+        rowsPanel.setOpaque(false);
+        add(rowsPanel, BorderLayout.CENTER);
+
+        renderRows(Map.of());
     }
 
     public void setController(OverallStatsController controller) {
@@ -49,18 +43,45 @@ public class DailyWinratesPanel extends JPanel implements PropertyChangeListener
         if (!(evt.getNewValue() instanceof Map<?, ?> rawMap)) {
             return;
         }
-        for (Map.Entry<?, ?> entry : rawMap.entrySet()) {
-            if (!(entry.getKey() instanceof String day) || !(entry.getValue() instanceof Number value)) {
+        Map<String, Double> dailyWinRates = new LinkedHashMap<>();
+        for (String day : DAY_ORDER) {
+            Object rawValue = rawMap.get(day);
+            if (!(rawValue instanceof Number value)) {
                 continue;
             }
-            WinrateProgressBar bar = bars.get(day);
-            JLabel label = labels.get(day);
-            if (bar == null || label == null) {
-                continue;
-            }
-            double pct = value.doubleValue();
-            bar.setValue((int) Math.round(pct));
-            label.setText(String.format("%.2f %%", pct));
+            dailyWinRates.put(day, value.doubleValue());
         }
+        renderRows(dailyWinRates);
+    }
+
+    private void renderRows(Map<String, Double> dailyWinRates) {
+        rowsPanel.removeAll();
+
+        int renderedRows = 0;
+        for (String day : DAY_ORDER) {
+            double pct = dailyWinRates.getOrDefault(day, 0.0);
+            if (pct <= 0.0) {
+                continue;
+            }
+
+            JLabel dayLabel = new JLabel(day);
+            dayLabel.setFont(Theme.Fonts.LABEL_BOLD);
+
+            WinrateProgressBar bar = new WinrateProgressBar((int) Math.round(pct));
+
+            JLabel valueLabel = new JLabel(String.format("%.2f %%", pct), SwingConstants.RIGHT);
+            valueLabel.setFont(Theme.Fonts.LABEL_BOLD);
+
+            rowsPanel.add(dayLabel);
+            rowsPanel.add(bar);
+            rowsPanel.add(valueLabel);
+            renderedRows++;
+        }
+
+        setVisible(renderedRows > 0);
+        rowsPanel.revalidate();
+        rowsPanel.repaint();
+        revalidate();
+        repaint();
     }
 }
