@@ -9,8 +9,8 @@ import controllers.OverallStatsController;
 import data.TradeFetcher;
 import data_structures.Account;
 import gui_elements.components.pages.*;
-import gui_elements.components.pages.AccountsPage;
 import gui_elements.components.pages.SearchPage;
+import gui_elements.components.panels.AccountSidebarPanel;
 import gui_elements.components.panels.SelectionPanel;
 import constants.ViewType;
 import models.AccountSelectionModel;
@@ -41,6 +41,8 @@ public class MainViewPanel extends JPanel {
     private ReportDataModel reportDataModel;
     private ReportsPage reportsPage;
     private TradeFetcher tradeFetcher = new TradeFetcher();
+    private AccountSidebarPanel accountSidebarPanel;
+    private boolean isAccountSidebarVisible;
 
     public MainViewPanel() {
         this.accountFetchingService = new AccountFetchingService();
@@ -50,13 +52,13 @@ public class MainViewPanel extends JPanel {
         reportsPage = new ReportsPage(reportDataModel, reportManagementService);
         contentPanel.add(reportsPage, ViewType.REPORTS.name());
 
-        accountsPage1.setAccountManagementService(accountManagementService);
-
         initControllers();
         bindAccountSelection();
+        initSidebar();
 
         cardLayout = (CardLayout) contentPanel.getLayout();
         selectionPanel1.setNavigationListener(this::switchView);
+        selectionPanel1.setAccountSidebarToggleListener(this::toggleAccountSidebar);
         switchView(ViewType.HOME);
     }
 
@@ -66,7 +68,6 @@ public class MainViewPanel extends JPanel {
         contentPanel = new JPanel();
         homePage1 = new HomePage();
         searchPage1 = new SearchPage(sharedTradeDataModel, sharedAccountSelectionModel);
-        accountsPage1 = new AccountsPage(accountManagementService);
         selectionPanel1 = new SelectionPanel();
 
         //======== this ========
@@ -77,7 +78,6 @@ public class MainViewPanel extends JPanel {
             contentPanel.setLayout(new CardLayout());
             contentPanel.add(homePage1, "HOME");
             contentPanel.add(searchPage1, "SEARCH");
-            contentPanel.add(accountsPage1, "ACCOUNTS");
         }
         add(contentPanel, BorderLayout.CENTER);
         add(selectionPanel1, BorderLayout.NORTH);
@@ -89,7 +89,6 @@ public class MainViewPanel extends JPanel {
     private JPanel contentPanel;
     private HomePage homePage1;
     private SearchPage searchPage1;
-    private AccountsPage accountsPage1;
     private SelectionPanel selectionPanel1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 
@@ -131,6 +130,20 @@ public class MainViewPanel extends JPanel {
     private void bindAccountSelection() {
         homePage1.getAccountSelectionPanel().setModel(sharedAccountSelectionModel);
         searchPage1.getSearchFieldPanel().getAccountSelectionPanel().setModel(sharedAccountSelectionModel);
+    }
+
+    private void initSidebar() {
+        accountSidebarPanel = new AccountSidebarPanel(sharedAccountSelectionModel, accountManagementService);
+        accountSidebarPanel.setVisible(false);
+        isAccountSidebarVisible = false;
+        add(accountSidebarPanel, BorderLayout.WEST);
+    }
+
+    private void toggleAccountSidebar() {
+        isAccountSidebarVisible = !isAccountSidebarVisible;
+        accountSidebarPanel.setVisible(isAccountSidebarVisible);
+        revalidate();
+        repaint();
     }
 
     private void saveCurrentStatsAsReport() {

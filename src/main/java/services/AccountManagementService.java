@@ -6,6 +6,7 @@ import models.AccountSelectionModel;
 import java.util.List;
 
 public class AccountManagementService {
+    private static final String EMPTY_SECRET = "";
     private final AccountFetchingService fetchingService;
     private final StatsCacheService statsCacheService;
     private AccountSelectionModel accountSelectionModel;
@@ -35,7 +36,17 @@ public class AccountManagementService {
             throw new IllegalArgumentException("Account with Login \"" + account.getLogin() + "\" already exists.");
         }
 
-        accounts.add(account);
+        Account sanitizedAccount = new Account(
+                account.getName(),
+                account.getType(),
+                account.getServer(),
+                account.getLogin(),
+                EMPTY_SECRET,
+                EMPTY_SECRET,
+                account.getAddedAt()
+        );
+
+        accounts.add(sanitizedAccount);
         fetchingService.saveAccounts(accounts);
         if (accountSelectionModel != null) {
             accountSelectionModel.setAccounts(accounts);

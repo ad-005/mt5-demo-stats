@@ -4,8 +4,7 @@ public enum ViewType {
 
     HOME("Home"),
     SEARCH("Search"),
-    REPORTS("Reports"),
-    ACCOUNTS("Accounts");
+    REPORTS("Reports");
 
     public final String title;
 

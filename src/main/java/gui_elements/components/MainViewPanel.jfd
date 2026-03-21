@@ -19,11 +19,6 @@ new FormModel {
 				}, new FormLayoutConstraints( class java.lang.String ) {
 					"value": "SEARCH"
 				} )
-				add( new FormComponent( "gui_elements.components.pages.AccountsPage" ) {
-					name: "accountsPage1"
-				}, new FormLayoutConstraints( class java.lang.String ) {
-					"value": "ACCOUNTS"
-				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "Center"
 			} )
