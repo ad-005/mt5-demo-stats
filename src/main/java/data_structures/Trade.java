@@ -20,6 +20,8 @@ public class Trade {
     private LocalDateTime closeTime;
     private double closePrice;
     private double profit;
+    private double commission;
+    private double swap;
     private double change;
     private String accountLogin;
     // END ATTRIBUTES
@@ -32,6 +34,13 @@ public class Trade {
     public Trade(LocalDateTime openTime, TradeSymbol symbol, String ticket, TradeType type, double volume,
                  double openPrice, double stopLoss, double takeProfit, LocalDateTime closeTime, double closePrice,
                  double profit, double change, String accountLogin) {
+        this(openTime, symbol, ticket, type, volume, openPrice, stopLoss, takeProfit, closeTime, closePrice,
+                profit, 0.0, 0.0, change, accountLogin);
+    }
+
+    public Trade(LocalDateTime openTime, TradeSymbol symbol, String ticket, TradeType type, double volume,
+                 double openPrice, double stopLoss, double takeProfit, LocalDateTime closeTime, double closePrice,
+                 double profit, double commission, double swap, double change, String accountLogin) {
         this.openTime = openTime;
         this.symbol = symbol;
         this.ticket = ticket;
@@ -43,6 +52,8 @@ public class Trade {
         this.closeTime = closeTime;
         this.closePrice = closePrice;
         this.profit = profit;
+        this.commission = commission;
+        this.swap = swap;
         this.change = change;
         this.accountLogin = accountLogin;
     }
@@ -60,6 +71,8 @@ public class Trade {
     public LocalDateTime getCloseTime() { return closeTime; }
     public double getClosePrice() { return closePrice; }
     public double getProfit() { return profit; }
+    public double getCommission() { return commission; }
+    public double getSwap() { return swap; }
     public double getChange() { return change; }
     public String getAccountLogin() { return accountLogin; }
     // END GETTERS

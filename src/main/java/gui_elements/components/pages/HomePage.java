@@ -7,28 +7,24 @@ package gui_elements.components.pages;
 import javax.swing.*;
 
 import controllers.OverallStatsController;
-import data.MockDataFactory;
-import data_structures.Trade;
 import gui_elements.components.panels.*;
-import models.AccountSelectionModel;
-import models.OverallStatsModel;
-import models.TradeDataModel;
 import net.miginfocom.swing.*;
 
-import java.util.List;
+import java.awt.*;
 
 /**
  * @author root
  */
 public class HomePage extends JPanel {
-//    private OverallStatsModel model;
-//    private OverallStatsController controller;
+    private PerformanceOverviewPanel performanceOverviewPanel1;
+    private DailyWinratesPanel dailyWinratesPanel1;
+    private TopSymbolsPanel topSymbolsPanel1;
+    private JScrollPane scrollPane;
+    private JPanel contentContainer;
 
     public HomePage() {
-//        model = new OverallStatsModel();
-//        controller = new OverallStatsController(model, sharedDataModel, accountSelectionModel);
-
         initComponents();
+        buildTieredLayout();
     }
 
     private void initComponents() {
@@ -86,18 +82,49 @@ public class HomePage extends JPanel {
     private SessionWinratesCustomPanel sessionWinratesCustomPanel1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 
-//    public void setStatsModel(OverallStatsModel statsModel) {
-//        this.model = statsModel;
-//    }
+    private void buildTieredLayout() {
+        performanceOverviewPanel1 = new PerformanceOverviewPanel();
+        dailyWinratesPanel1 = new DailyWinratesPanel();
+        topSymbolsPanel1 = new TopSymbolsPanel();
 
-//    public OverallStatsController getController() {
-//        return controller;
-//    }
+        JPanel overviewRow = new JPanel(new GridLayout(1, 2, 10, 0));
+        overviewRow.setOpaque(false);
+        overviewRow.add(winratePanel1);
+        overviewRow.add(tradingBiasPanel1);
+
+        contentContainer = new JPanel();
+        contentContainer.setLayout(new BoxLayout(contentContainer, BoxLayout.Y_AXIS));
+        contentContainer.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        contentContainer.add(accountSelectionPanel1);
+        contentContainer.add(Box.createVerticalStrut(10));
+        contentContainer.add(overviewRow);
+        contentContainer.add(Box.createVerticalStrut(10));
+        contentContainer.add(sessionWinratesCustomPanel1);
+        contentContainer.add(Box.createVerticalStrut(10));
+        contentContainer.add(performanceOverviewPanel1);
+        contentContainer.add(Box.createVerticalStrut(10));
+        contentContainer.add(dailyWinratesPanel1);
+        contentContainer.add(Box.createVerticalStrut(10));
+        contentContainer.add(topSymbolsPanel1);
+
+        scrollPane = new JScrollPane(contentContainer);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        scrollPane.getVerticalScrollBar().setUnitIncrement(14);
+
+        removeAll();
+        setLayout(new BorderLayout());
+        add(scrollPane, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
 
     public void setStatsController(OverallStatsController controller) {
         winratePanel1.setController(controller);
         tradingBiasPanel1.setController(controller);
         sessionWinratesCustomPanel1.setController(controller);
+        performanceOverviewPanel1.setController(controller);
+        dailyWinratesPanel1.setController(controller);
+        topSymbolsPanel1.setController(controller);
     }
     
     public AccountSelectionPanel getAccountSelectionPanel() { return accountSelectionPanel1; }
