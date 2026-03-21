@@ -81,6 +81,10 @@ public class DailyWinratesPanel extends JPanel implements PropertyChangeListener
         setVisible(renderedRows > 0);
         rowsPanel.revalidate();
         rowsPanel.repaint();
+        if (getParent() != null) {
+            getParent().revalidate();
+            getParent().repaint();
+        }
         revalidate();
         repaint();
     }

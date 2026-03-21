@@ -293,13 +293,18 @@ public class TradeStatisticsService {
         }
 
         for (Trade trade : trades) {
-            if (trade.getOpenTime() == null || trade.getBrokerTimeZone() == null) {
+            if (trade.getOpenTime() == null) {
                 continue;
             }
-            DayOfWeek dayOfWeek = trade.getOpenTime()
-                    .atZone(trade.getBrokerTimeZone())
-                    .withZoneSameInstant(ZoneId.of("UTC"))
-                    .getDayOfWeek();
+            DayOfWeek dayOfWeek;
+            if (trade.getBrokerTimeZone() != null) {
+                dayOfWeek = trade.getOpenTime()
+                        .atZone(trade.getBrokerTimeZone())
+                        .withZoneSameInstant(ZoneId.of("UTC"))
+                        .getDayOfWeek();
+            } else {
+                dayOfWeek = trade.getOpenTime().getDayOfWeek();
+            }
             String day = dayOfWeek != null ? toDayLabel(dayOfWeek) : null;
             if (day == null) {
                 continue;
