@@ -11,6 +11,7 @@ import gui_elements.components.panels.*;
 import net.miginfocom.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 /**
  * @author root
@@ -21,6 +22,7 @@ public class HomePage extends JPanel {
     private TopSymbolsPanel topSymbolsPanel1;
     private JScrollPane scrollPane;
     private JPanel contentContainer;
+    private JButton saveAsReportButton;
 
     public HomePage() {
         initComponents();
@@ -97,6 +99,10 @@ public class HomePage extends JPanel {
         contentContainer.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
         contentContainer.add(accountSelectionPanel1);
         contentContainer.add(Box.createVerticalStrut(10));
+        saveAsReportButton = new JButton("Save as Report");
+        saveAsReportButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        contentContainer.add(saveAsReportButton);
+        contentContainer.add(Box.createVerticalStrut(10));
         contentContainer.add(overviewRow);
         contentContainer.add(Box.createVerticalStrut(10));
         contentContainer.add(sessionWinratesCustomPanel1);
@@ -128,4 +134,13 @@ public class HomePage extends JPanel {
     }
     
     public AccountSelectionPanel getAccountSelectionPanel() { return accountSelectionPanel1; }
+
+    public void setSaveAsReportListener(ActionListener listener) {
+        if (saveAsReportButton != null) {
+            for (ActionListener existing : saveAsReportButton.getActionListeners()) {
+                saveAsReportButton.removeActionListener(existing);
+            }
+            saveAsReportButton.addActionListener(listener);
+        }
+    }
 }

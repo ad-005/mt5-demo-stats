@@ -22,6 +22,7 @@ public class OverallStatsController implements PropertyChangeListener {
     private final TradeStatisticsService statisticsService;
     private final StatsCacheService statsCacheService;
     private final AccountSelectionModel accountSelectionModel;
+    private TradeStatistics currentStatistics;
 
     public OverallStatsController(OverallStatsModel statsModel, TradeDataModel dataModel, AccountSelectionModel accountSelectionModel) {
         this.statsModel = statsModel;
@@ -46,6 +47,7 @@ public class OverallStatsController implements PropertyChangeListener {
         TradeStatistics stats = accountSelectionModel.isAllAccountsSelected()
                 ? getAllAccountsAggregatedStats()
                 : getSelectedAccountStats();
+        currentStatistics = stats;
         statsModel.updateFrom(stats);
     }
 
@@ -93,5 +95,9 @@ public class OverallStatsController implements PropertyChangeListener {
 
     public OverallStatsModel getStatsModel() {
         return statsModel;
+    }
+
+    public TradeStatistics getCurrentStatistics() {
+        return currentStatistics;
     }
 }
